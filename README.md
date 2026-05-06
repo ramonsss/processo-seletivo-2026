@@ -12,7 +12,7 @@ Trilha de Desenvolvimento (Mini E-commerce)
 
 ## 📞 Contato
 
-Email: ramon14souza@gmail.com(mailto:ramon14souza@gmail.com)
+Email: [ramon14souza@gmail.com](mailto:ramon14souza@gmail.com)
 WhatsApp: (91) 9 9365-0461
 
 ## 🚀 Como rodar o projeto
