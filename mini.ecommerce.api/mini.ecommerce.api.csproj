@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>f9d0cfc3-4232-4381-b0e7-09ace2715cce</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.26" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Adapter\Inboud\AdapterHttp\Helper\" />
+    <Folder Include="Adapter\Inboud\AdapterHttp\Mapper\" />
+    <Folder Include="Adapter\Inboud\AdapterHttp\Routes\" />
+    <Folder Include="Adapter\Outbound\AdapterSql\Settings\" />
+    <Folder Include="Adapter\Outbound\AdapterSql\Repository\" />
+    <Folder Include="Domain\Context\" />
+    <Folder Include="Domain\Core\Base\" />
+    <Folder Include="Domain\Core\Enums\" />
+    <Folder Include="Domain\Core\Model\" />
+    <Folder Include="Domain\UseCase\" />
+    <Folder Include="Infra\" />
+  </ItemGroup>
+
+</Project>
