@@ -45,6 +45,10 @@ A escolha das tecnologias foi guiada principalmente por experiência prática e 
 
 * React foi utilizado no frontend devido à maior familiaridade com a biblioteca, permitindo desenvolvimento mais rápido, componentização eficiente e melhor organização da interface.
 
+* A Arquitetura Hexagonal foi utilizada com o objetivo de desacoplar as regras de negócio das camadas externas da aplicação, facilitando manutenção, testes e futuras substituições de tecnologias sem impactar o domínio principal.
+
+* O DDD (Domain Driven Design) foi adotado para organizar melhor as responsabilidades do sistema, deixando as regras de negócio mais claras e próximas do contexto do domínio da aplicação. Essa abordagem também contribui para maior escalabilidade e legibilidade do código.
+
 De forma geral, as escolhas priorizam produtividade, previsibilidade e aderência a práticas já consolidadas no desenvolvimento profissional.
 
 
