@@ -12,20 +12,28 @@
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.26" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.7" />
+
+    <!--SQL-->
+    <PackageReference Include="Dapper" Version="2.1.35" />
+    <PackageReference Include="Dapper.Contrib" Version="2.0.78" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
+
+    <!--VALIDATOR-->
+    <PackageReference Include="FlatValidator" Version="2.6.0" />
+    <PackageReference Include="FlatValidator.DependencyInjection" Version="2.6.0" />
+
+    <!--HTTP-->
+    <PackageReference Include="Flurl.Http" Version="4.0.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Adapter\Inboud\AdapterHttp\Helper\" />
     <Folder Include="Adapter\Inboud\AdapterHttp\Mapper\" />
-    <Folder Include="Adapter\Inboud\AdapterHttp\Routes\" />
     <Folder Include="Adapter\Outbound\AdapterSql\Settings\" />
     <Folder Include="Adapter\Outbound\AdapterSql\Repository\" />
     <Folder Include="Domain\Context\" />
-    <Folder Include="Domain\Core\Base\" />
-    <Folder Include="Domain\Core\Enums\" />
     <Folder Include="Domain\Core\Model\" />
     <Folder Include="Domain\UseCase\" />
-    <Folder Include="Infra\" />
   </ItemGroup>
 
 </Project>
