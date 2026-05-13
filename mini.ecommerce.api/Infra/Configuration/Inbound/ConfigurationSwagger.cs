@@ -13,8 +13,8 @@ namespace mini.ecommerce.api.Infra.Configuration.Inbound
         public static void ConfigureSwaggerGenOptions(SwaggerGenOptions options)
         {
             var contact = new OpenApiContact();
-            contact.Name = "Ramon Souza";
-            contact.Email = "ramon14souza@gmail.com";
+            contact.Name = "Ramon Souza & Yslan Lopes";
+            contact.Email = "ramon14souza@gmail.com & yslan.contato@gmail.com";
 
             var securityScheme = new OpenApiSecurityScheme()
             {
