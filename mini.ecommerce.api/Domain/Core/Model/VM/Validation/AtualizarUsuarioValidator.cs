@@ -3,9 +3,9 @@ using System.Validation;
 
 namespace mini.ecommerce.api.Domain.Core.Model.VM.Validation
 {
-    public class UsuarioValidator : FlatValidator<UsuarioRequest>
+    public class AtualizarUsuarioValidator : FlatValidator<AtualizarUsuarioRequest>
     {
-        public UsuarioValidator() 
+        public AtualizarUsuarioValidator()
         {
             ErrorIf(r => r.nome is null, r => "Não pode ser nulo", r => r.nome);
 
@@ -17,11 +17,7 @@ namespace mini.ecommerce.api.Domain.Core.Model.VM.Validation
                 ValidIf(r => MyRegex.ValidaEmail(r.email!), r => "Email fora do padrão", r => r.email);
             });
 
-            ErrorIf(r => r.senha is null, r => "Não pode ser nulo", r => r.senha);
 
-            ErrorIf(r => r.confirmaSenha is null, r => "Não pode ser nulo", r => r.confirmaSenha);
-
-            ErrorIf(r => r.tipoUsuario is null, r => "Não pode ser nulo", r => r.tipoUsuario);
 
             ErrorIf(r => r.telefone is null, r => "Não pode ser nulo", r => r.telefone);
 
