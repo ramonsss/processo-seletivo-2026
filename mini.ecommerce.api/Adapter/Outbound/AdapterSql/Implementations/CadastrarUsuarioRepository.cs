@@ -13,7 +13,7 @@ public class CadastrarUsuarioRepository(IPostgreSQLConnection connection) : ICad
 {
     private readonly IPostgreSQLConnection _connection = connection;
     
-    public async ValueTask<UsuarioResponse> CadastrarUsuario(UsuarioRequest usuarioRequest)
+    public async ValueTask<UsuarioFunctionResponse> CadastrarUsuario(UsuarioRequest usuarioRequest)
     { 
         using var activity = Activity.Current?.Source.StartActivity("cadastra-usuario-repository");
         using var connection = _connection.ConnectCLUST("PROSEL_LAPES");
@@ -59,7 +59,7 @@ public class CadastrarUsuarioRepository(IPostgreSQLConnection connection) : ICad
 
         activity?.SetTag("mensagem_out", jsonResponse);
 
-        var response = JsonSerializer.Deserialize<UsuarioResponse>(
+        var response = JsonSerializer.Deserialize<UsuarioFunctionResponse>(
                 jsonResponse,
                 new JsonSerializerOptions
                 {

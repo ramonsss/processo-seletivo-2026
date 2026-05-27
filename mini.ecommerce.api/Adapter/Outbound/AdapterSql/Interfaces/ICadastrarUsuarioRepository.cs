@@ -5,5 +5,5 @@ namespace mini.ecommerce.api.Adapter.Outbound.AdapterSql.Interfaces;
 
 public interface ICadastrarUsuarioRepository
 {
-    public ValueTask<UsuarioResponse> CadastrarUsuario(UsuarioRequest usuarioRequest);
+    public ValueTask<UsuarioFunctionResponse> CadastrarUsuario(UsuarioRequest usuarioRequest);
 }

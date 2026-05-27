@@ -1,3 +1,4 @@
+using mini.ecommerce.api.Infra.Configuration.Domain;
 using mini.ecommerce.api.Infra.Configuration.Inbound;
 using mini.ecommerce.api.Infra.Outbound;
 using System.Reflection;
@@ -9,7 +10,7 @@ builder.Services.ConfigureInboundAdapters(builder.Configuration);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerConfigs();
 builder.Services.AddJwtBearer();
-//builder.Services.AddDomainServices(); -> Vai ser pros useCases
+builder.Services.AddUseCaseExtensions();
 builder.Services.AddSqlExtensions();
 
 var app = builder.Build();
