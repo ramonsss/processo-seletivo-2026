@@ -7,6 +7,6 @@ namespace mini.ecommerce.api.Domain.UseCase.Interfaces
 {
     public interface ICadastrarUsuarioUseCase
     {
-        Task<BaseReturn<UsuarioResponse>> CadastraUsuario(UsuarioRequest domainRequest);
+        Task<BaseReturn<UsuarioResponse>> CadastraUsuarioAsync(UsuarioRequest domainRequest);
     }
 }

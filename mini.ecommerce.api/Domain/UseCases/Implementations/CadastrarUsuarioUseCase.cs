@@ -12,7 +12,7 @@ namespace mini.ecommerce.api.Domain.UseCases.Implementations
     {
         private readonly ICadastrarUsuarioRepository _cadastrarUsuarioRepository = serviceProvider.GetRequiredService<ICadastrarUsuarioRepository>();
         
-        public async Task<BaseReturn<UsuarioResponse>> CadastraUsuario(UsuarioRequest domainRequest)
+        public async Task<BaseReturn<UsuarioResponse>> CadastraUsuarioAsync(UsuarioRequest domainRequest)
         {
             UsuarioFunctionResponse response = await _cadastrarUsuarioRepository.CadastrarUsuario(domainRequest);
 
