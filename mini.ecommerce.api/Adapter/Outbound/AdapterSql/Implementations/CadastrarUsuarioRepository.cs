@@ -27,6 +27,8 @@ public class CadastrarUsuarioRepository(IPostgreSQLConnection connection) : ICad
         parameters.Add("p_nome", usuarioRequest.nome, DbType.String, ParameterDirection.Input);
         parameters.Add("p_sobrenome", usuarioRequest.sobrenome, DbType.String, ParameterDirection.Input);
         parameters.Add("p_email", usuarioRequest.email, DbType.String, ParameterDirection.Input);
+        parameters.Add("p_senha", usuarioRequest.senha, DbType.String, ParameterDirection.Input);
+        parameters.Add("p_confirma_senha", usuarioRequest.confirmaSenha, DbType.String, ParameterDirection.Input);
         parameters.Add("p_tipo_usuario", usuarioRequest.tipoUsuario, DbType.String, ParameterDirection.Input);
         parameters.Add("p_cnpj_cpf", usuarioRequest.cnpjCpf, DbType.String, ParameterDirection.Input);
         parameters.Add("p_data_nascimento", usuarioRequest.dataNascimento, DbType.Date, ParameterDirection.Input);
@@ -34,9 +36,42 @@ public class CadastrarUsuarioRepository(IPostgreSQLConnection connection) : ICad
         parameters.Add("p_telefone", usuarioRequest.telefone, DbType.String, ParameterDirection.Input);
         
         activity?.SetTag("mensagem_in", JsonSerializer.Serialize(usuarioRequest));
-        
-        await connection.ExecuteAsync(functionName, parameters, commandType: CommandType.StoredProcedure);
-        
-        //TODO: continuar a logica de conexão
+
+        var sql =
+           $"SELECT {functionName}(" +
+           "@p_nome," +
+           "@p_sobrenome," +
+           "@p_email," +
+           "@p_senha," +
+           "@p_tipo_usuario," +
+           "@p_cnpj_cpf," +
+           "@p_data_nascimento," +
+           "@p_foto_perfil_url," +
+           "@p_telefone" +
+           ");";
+
+        var jsonResponse = await connection.QueryFirstOrDefaultAsync<string>(sql, parameters);
+
+        if (string.IsNullOrWhiteSpace(jsonResponse))
+        {
+            throw new Exception("Nenhuma resposta retornada pela função.");
+        }
+
+        activity?.SetTag("mensagem_out", jsonResponse);
+
+        var response = JsonSerializer.Deserialize<UsuarioResponse>(
+                jsonResponse,
+                new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
+
+        if (response is null)
+        {
+            throw new Exception(
+                "Erro ao desserializar resposta.");
+        }
+
+        return response;
     }
 }

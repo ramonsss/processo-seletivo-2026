@@ -1,4 +1,5 @@
 using mini.ecommerce.api.Infra.Configuration.Inbound;
+using mini.ecommerce.api.Infra.Outbound;
 using System.Reflection;
 using System.Validation;
 
@@ -9,7 +10,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerConfigs();
 builder.Services.AddJwtBearer();
 //builder.Services.AddDomainServices(); -> Vai ser pros useCases
-//builder.Services.AddSQLConfig(builder.Configuration/*, ["SQLCLUST05"]*/); -> vai ser pro banco
+builder.Services.AddSqlExtensions();
 
 var app = builder.Build();
 app.MapSwagger();
