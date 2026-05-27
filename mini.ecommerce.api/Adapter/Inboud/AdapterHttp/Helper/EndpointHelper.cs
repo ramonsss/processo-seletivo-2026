@@ -1,8 +1,8 @@
-﻿using apiMcardPrePagoGestorRelatorio.Domain.Core.Base;
-using apiMcardPrePagoGestorRelatorio.Domain.Core.Enums;
-using System.Diagnostics;
+﻿using System.Diagnostics;
+using mini.ecommerce.api.Domain.Core.Base;
+using mini.ecommerce.api.Domain.Core.Enums;
 
-namespace apiMcardPrePagoGestorRelatorio.Adapter.Inbound.AdapterHttp.Helper
+namespace mini.ecommerce.api.Adapter.Inboud.AdapterHttp.Mapper
 {
     public static class EndpointHelper
     {

@@ -1,7 +1,7 @@
-﻿using apiMcardPrePagoGestorRelatorio.Domain.Core.Enums;
-using System.Text.Json;
+﻿using System.Text.Json;
+using mini.ecommerce.api.Domain.Core.Enums;
 
-namespace apiMcardPrePagoGestorRelatorio.Domain.Core.Base
+namespace mini.ecommerce.api.Domain.Core.Base
 {
     public record BaseError
     {

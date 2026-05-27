@@ -5,7 +5,10 @@
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DATABASE_CLUSTER": "localhost",
+        "DATABASE_USERNAME": "postgres",
+        "DATABASE_PASSWORD": "K8MiLR1WvxvGzRHD2I4lIstoowE7nUrY"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "http://localhost:5000"

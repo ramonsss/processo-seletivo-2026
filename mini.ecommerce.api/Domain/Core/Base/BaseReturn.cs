@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
-using apiMcardPrePagoGestorRelatorio.Domain.Core.Enums;
+using mini.ecommerce.api.Domain.Core.Enums;
 
-namespace apiMcardPrePagoGestorRelatorio.Domain.Core.Base
+namespace mini.ecommerce.api.Domain.Core.Base
 {
     public struct BaseReturn<TSuccesso>
     {

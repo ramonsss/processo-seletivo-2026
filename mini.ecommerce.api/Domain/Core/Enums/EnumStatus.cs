@@ -1,4 +1,4 @@
-﻿namespace apiMcardPrePagoGestorRelatorio.Domain.Core.Enums
+﻿namespace mini.ecommerce.api.Domain.Core.Enums
 {
     public enum EnumStatus
     {
