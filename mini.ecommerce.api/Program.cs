@@ -10,6 +10,7 @@ builder.Services.ConfigureInboundAdapters(builder.Configuration);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerConfigs();
 builder.Services.AddJwtBearer();
+builder.Services.AddFlatValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 builder.Services.AddUseCaseExtensions();
 builder.Services.AddSqlExtensions();
 

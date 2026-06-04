@@ -32,7 +32,6 @@
     <Folder Include="Adapter\Inboud\AdapterHttp\Mapper\" />
     <Folder Include="Domain\Context\" />
     <Folder Include="Domain\Core\Model\" />
-    <Folder Include="Domain\UseCase\" />
   </ItemGroup>
 
 </Project>

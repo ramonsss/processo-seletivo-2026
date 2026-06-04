@@ -10,12 +10,16 @@ namespace mini.ecommerce.api.Domain.Core.Base
         public string? msgErro { get; init; }
         public string? origemErro { get; init; }
 
+        public BaseError()
+        {
+        }
+        
         public BaseError(EnumStatus tipoErro, int? codErro, string? msgErro)
         {
             this.tipoErro = tipoErro;
             this.codErro = codErro;
             this.msgErro = msgErro;
-            this.origemErro = "apiMardPrePagoPortadorCartao";
+            this.origemErro = "mini.ecommerce.api";
         }
 
         public BaseError(EnumStatus tipoErro, int? codErro, string? msgErro, string? origemErro)

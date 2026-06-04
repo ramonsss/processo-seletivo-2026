@@ -1,4 +1,5 @@
 ﻿using mini.ecommerce.api.Domain.Core.Enums;
+using mini.ecommerce.api.Domain.Core.Model.DTO;
 
 namespace mini.ecommerce.api.Domain.Core.Model.VM.Request
 {
@@ -14,5 +15,7 @@ namespace mini.ecommerce.api.Domain.Core.Model.VM.Request
         public string? cnpjCpf { get; set; }
         public DateOnly? dataNascimento { get; set; }
         public string? fotoPerfilUrl { get; set; }
+        
+        public HttpRequestHeader? header { get; set; }
     }
 }

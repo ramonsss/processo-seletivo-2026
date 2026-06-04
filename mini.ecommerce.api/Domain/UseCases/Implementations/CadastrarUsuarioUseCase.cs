@@ -14,6 +14,7 @@ namespace mini.ecommerce.api.Domain.UseCases.Implementations
         
         public async Task<BaseReturn<UsuarioResponse>> CadastraUsuarioAsync(UsuarioRequest domainRequest)
         {
+            
             UsuarioFunctionResponse response = await _cadastrarUsuarioRepository.CadastrarUsuario(domainRequest);
 
             if(response.Status == EnumStatus.SUCESSO)

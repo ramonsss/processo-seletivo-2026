@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http.Headers;
 using Microsoft.AspNetCore.Mvc;
+using mini.ecommerce.api.Adapter.Inboud.AdapterHttp.Filter;
 using mini.ecommerce.api.Adapter.Inboud.AdapterHttp.Mapper;
 using mini.ecommerce.api.Domain.Core.Enums;
+using mini.ecommerce.api.Domain.Core.Model.DTO;
 using mini.ecommerce.api.Domain.Core.Model.VM.Request;
 using mini.ecommerce.api.Domain.UseCase.Interfaces;
 
@@ -13,7 +15,8 @@ namespace mini.ecommerce.api.Adapter.Inboud.AdapterHttp.Routes
         {
             app.MapPost("api/v1/usuario", CadastraUsuario)
             .WithTags("Cadastrar Usuarios")
-            .RequireAuthorization()
+            .AddEndpointFilter<ValidationFilter<UsuarioRequest>>()
+            //.RequireAuthorization()
             ;
 
         }
@@ -23,6 +26,11 @@ namespace mini.ecommerce.api.Adapter.Inboud.AdapterHttp.Routes
         {
             try
             {
+                request.header ??= new HttpRequestHeader();
+
+                request.header.chaveIdempotencia ??=
+                    Guid.NewGuid().ToString();
+                
                 var response = await useCase.CadastraUsuarioAsync(request);
 
                 return response.Status ==
