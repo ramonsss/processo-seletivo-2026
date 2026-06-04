@@ -51,7 +51,7 @@ public class LoginUsuarioRepository(IPostgreSQLConnection connection) : ILoginUs
                 PropertyNameCaseInsensitive = true
             });
 
-        if (response is null)
+        if (response is null) 
         {
             throw new Exception(
                 "Erro ao desserializar resposta.");
