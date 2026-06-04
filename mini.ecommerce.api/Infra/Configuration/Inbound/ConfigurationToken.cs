@@ -30,7 +30,6 @@ namespace mini.ecommerce.api.Infra.Configuration.Inbound
             });
 
             services.AddAuthorization();
-            services.AddAuthentication();
             return services;
         }
     }
