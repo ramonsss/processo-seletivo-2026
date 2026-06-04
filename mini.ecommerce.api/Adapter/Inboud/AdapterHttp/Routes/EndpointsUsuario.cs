@@ -22,14 +22,18 @@ namespace mini.ecommerce.api.Adapter.Inboud.AdapterHttp.Routes
         }
 
         public static async Task<IResult> CadastraUsuario([FromBody] UsuarioRequest request,
+                                                          [FromHeader(Name = "Chave-Idempotencia")] string? chaveIdempotencia,
                                                           [FromServices] ICadastrarUsuarioUseCase useCase)
         {
+            chaveIdempotencia ??= Guid.NewGuid().ToString();
+
+            request.header ??= new HttpRequestHeader();
+
+            request.header.chaveIdempotencia = chaveIdempotencia;
+            
+            request.header!.chaveIdempotencia = chaveIdempotencia;
             try
             {
-                request.header ??= new HttpRequestHeader();
-
-                request.header.chaveIdempotencia ??=
-                    Guid.NewGuid().ToString();
                 
                 var response = await useCase.CadastraUsuarioAsync(request);
 

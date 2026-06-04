@@ -19,7 +19,7 @@ namespace mini.ecommerce.api.Infra.Configuration.Inbound
             var securityScheme = new OpenApiSecurityScheme()
             {
                 Name = "Authorization",
-                Type = SecuritySchemeType.ApiKey,
+                Type = SecuritySchemeType.Http,
                 Scheme = "Bearer",
                 BearerFormat = "JWT",
                 In = ParameterLocation.Header,
