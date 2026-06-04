@@ -8,6 +8,7 @@ namespace mini.ecommerce.api.Infra.Configuration.Domain
         public static void AddUseCaseExtensions(this IServiceCollection services)
         {
             services.AddScoped<ICadastrarUsuarioUseCase, CadastrarUsuarioUseCase>();
+            services.AddScoped<ILoginUsuarioUsecase, LoginUsuarioUsecase>();
         }
     }
 }
