@@ -11,6 +11,7 @@ namespace mini.ecommerce.api.Infra.Outbound
             services.AddSingleton<IPostgreSQLConnection, PostgreSQLConnection>();
 
             services.AddScoped<ICadastrarUsuarioRepository, CadastrarUsuarioRepository>();
+            services.AddScoped<ILoginUsuarioRepository, LoginUsuarioRepository>();
         }
     }
 }
