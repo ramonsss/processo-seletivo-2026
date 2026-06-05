@@ -14,9 +14,14 @@ namespace mini.ecommerce.api.Adapter.Inboud.AdapterHttp.Routes
         public static void AddEndpointAcessoUsuario(this IEndpointRouteBuilder app)
         {
             app.MapPost("api/v1/usuario", CadastraUsuario)
-            .WithTags("Cadastrar Usuarios")
+            .WithTags("Cadastrar Usuario")
             .AddEndpointFilter<ValidationFilter<UsuarioRequest>>()
             //.RequireAuthorization()
+            ;
+
+            app.MapPost("api/v1/usuario/login", LoginUsuario)
+            .WithTags("Login Usuario")
+            .AddEndpointFilter<ValidationFilter<LoginRequest>>()
             ;
 
         }
@@ -48,6 +53,28 @@ namespace mini.ecommerce.api.Adapter.Inboud.AdapterHttp.Routes
                     .HandleException(
                         ex,
                         "cadastrar-usuario-endpoint");
+            }
+        }
+
+        public static async Task<IResult> LoginUsuario([FromBody] LoginRequest request, 
+                                                       [FromServices] ILoginUsuarioUsecase usecase)
+        {
+            try
+            {
+                
+                var response = await usecase.LoginUsuarioAsync(request);
+
+                return response.Status ==
+                       Domain.Core.Enums.EnumStatus.SUCESSO
+                    ? Results.Ok(response)
+                    : Results.BadRequest(response);
+            }
+            catch (Exception ex)
+            {
+                return EndpointHelper
+                    .HandleException(
+                        ex,
+                        "login-usuario-endpoint");
             }
         }
     }

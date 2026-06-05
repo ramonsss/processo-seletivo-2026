@@ -3,6 +3,8 @@ using mini.ecommerce.api.Infra.Configuration.Inbound;
 using mini.ecommerce.api.Infra.Outbound;
 using System.Reflection;
 using System.Validation;
+using mini.ecommerce.api.Adapter.Outbound.AdapterAuth.Implementations;
+using mini.ecommerce.api.Adapter.Outbound.AdapterAuth.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,7 @@ builder.Services.ConfigureInboundAdapters(builder.Configuration);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerConfigs();
 builder.Services.AddJwtBearer();
+builder.Services.AddScoped<ITokenService, JwtTokenService>();
 builder.Services.AddFlatValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 builder.Services.AddUseCaseExtensions();
 builder.Services.AddSqlExtensions();

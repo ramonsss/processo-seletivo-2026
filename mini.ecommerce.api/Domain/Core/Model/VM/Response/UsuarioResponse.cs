@@ -14,7 +14,7 @@ namespace mini.ecommerce.api.Domain.Core.Model.VM.Response
         public DateOnly? dataNascimento { get; set; }
         public string? fotoPerfilUrl { get; set; }
         public bool? Ativo { get; set; }
-        public DateOnly? UltimoLogin { get; set; }
+        public DateTime? UltimoLogin { get; set; }
         public DateTime? dtHrCriacao { get; set; }
         public DateTime? dtHrAtualizacao { get; set; }
     }
