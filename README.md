@@ -563,6 +563,219 @@ END;
 $$;
 ```
 
+---
+
+### 3.4 — Função e Estrutura de Login
+
+```sql
+CREATE TABLE usuario_refresh_token (
+    id SERIAL PRIMARY KEY,
+    usuario_id INT NOT NULL,
+    refresh_token TEXT NOT NULL,
+    expiracao TIMESTAMP NOT NULL,
+    revogado BOOLEAN DEFAULT FALSE,
+    criado_em TIMESTAMP DEFAULT NOW(),
+
+    CONSTRAINT fk_usuario_refresh_token
+        FOREIGN KEY (usuario_id)
+        REFERENCES usuarios(id)
+        ON DELETE CASCADE
+);
+
+CREATE INDEX idx_usuario_refresh_token_usuario_id
+ON usuario_refresh_token(usuario_id);
+
+CREATE OR REPLACE FUNCTION fn_usuario_login(
+    p_email TEXT,
+    p_senha TEXT
+)
+RETURNS JSONB
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    v_usuario_id INT;
+    v_senha_hash TEXT;
+
+    v_usuario JSONB;
+
+    v_refresh_token TEXT;
+    v_refresh_expiracao TIMESTAMP;
+
+    v_msg_in JSONB;
+    v_msg_out JSONB;
+
+BEGIN
+
+-- MSG IN
+v_msg_in := jsonb_build_object(
+    'email', LOWER(TRIM(p_email))
+);
+
+-- BUSCA USUÁRIO
+SELECT 
+    u.id,
+    u.senha_hash,
+    jsonb_build_object(
+        'Id', u.id,
+        'nome', u.nome,
+        'sobrenome', u.sobrenome,
+        'email', e.email,
+        'tipoUsuario',
+        CASE 
+            WHEN u.tipo_usuario = 'ADMIN' THEN 0
+            WHEN u.tipo_usuario = 'CUSTOMER' THEN 1
+            ELSE NULL
+        END,
+        'telefone', t.telefone,
+        'cnpjCpf', u.cnpj_cpf,
+        'dataNascimento', u.data_nascimento,
+        'fotoPerfilUrl', u.foto_perfil_url,
+        'Ativo', u.ativo,
+		'ultimoLogin', u.ultimo_login,
+        'dtHrCriacao', u.dt_hr_criacao,
+        'dtHrAtualizacao', u.dt_hr_atualizacao
+    )
+INTO v_usuario_id, v_senha_hash, v_usuario
+FROM usuarios u
+JOIN usuario_email e ON e.usuario_id = u.id
+LEFT JOIN usuario_telefone t ON t.usuario_id = u.id AND t.principal = TRUE
+WHERE e.email = LOWER(TRIM(p_email))
+LIMIT 1;
+
+-- USUÁRIO NÃO ENCONTRADO
+IF v_usuario_id IS NULL THEN
+
+    v_msg_out := jsonb_build_object(
+        'Status', 1,
+        'SuccessObject', NULL,
+        'ErrorObject', jsonb_build_object(
+            'tipoErro', 1,
+            'codErro', 401,
+            'msgErro', 'Usuário não encontrado',
+            'origemErro', 'PostgreSQL'
+        )
+    );
+
+    PERFORM fn_log_evento(
+        NULL,
+        'LOGIN',
+        'ERROR',
+        'Usuário não encontrado',
+        v_msg_in,
+        v_msg_out
+    );
+
+    RETURN v_msg_out;
+END IF;
+
+-- VALIDA SENHA
+IF crypt(p_senha, v_senha_hash) <> v_senha_hash THEN
+
+    v_msg_out := jsonb_build_object(
+        'Status', 1,
+        'SuccessObject', NULL,
+        'ErrorObject', jsonb_build_object(
+            'tipoErro', 1,
+            'codErro', 401,
+            'msgErro', 'Senha inválida',
+            'origemErro', 'PostgreSQL'
+        )
+    );
+
+    PERFORM fn_log_evento(
+        v_usuario_id,
+        'LOGIN',
+        'ERROR',
+        'Senha inválida',
+        v_msg_in,
+        v_msg_out
+    );
+
+    RETURN v_msg_out;
+END IF;
+
+-- ATUALIZA ÚLTIMO LOGIN
+UPDATE usuarios
+SET ultimo_login = NOW()
+WHERE id = v_usuario_id;
+
+-- REVOGA TOKENS ANTIGOS
+UPDATE usuario_refresh_token
+SET revogado = TRUE
+WHERE usuario_id = v_usuario_id
+AND revogado = FALSE;
+
+-- GERA REFRESH TOKEN
+v_refresh_token := encode(gen_random_bytes(64), 'hex');
+v_refresh_expiracao := NOW() + INTERVAL '7 days';
+
+INSERT INTO usuario_refresh_token(
+    usuario_id,
+    refresh_token,
+    expiracao,
+    revogado,
+    criado_em
+)
+VALUES (
+    v_usuario_id,
+    v_refresh_token,
+    v_refresh_expiracao,
+    FALSE,
+    NOW()
+);
+
+-- SUCCESS RESPONSE
+v_msg_out := jsonb_build_object(
+    'Status', 0,
+    'SuccessObject', jsonb_build_object(
+        'usuario', v_usuario,
+        'refreshToken', v_refresh_token,
+        'expiracaoRefreshToken', v_refresh_expiracao
+    ),
+    'ErrorObject', NULL
+);
+
+-- LOG SUCCESS
+PERFORM fn_log_evento(
+    v_usuario_id,
+    'LOGIN',
+    'SUCCESS',
+    'Login realizado com sucesso',
+    v_msg_in,
+    v_msg_out
+);
+
+RETURN v_msg_out;
+
+-- EXCEPTION
+EXCEPTION
+WHEN OTHERS THEN
+
+    v_msg_out := jsonb_build_object(
+        'Status', 2,
+        'SuccessObject', NULL,
+        'ErrorObject', jsonb_build_object(
+            'tipoErro', 3,
+            'codErro', 500,
+            'msgErro', 'Erro interno no login',
+            'origemErro', 'PostgreSQL'
+        )
+    );
+
+    PERFORM fn_log_evento(
+        NULL,
+        'LOGIN',
+        'ERROR',
+        SQLERRM,
+        v_msg_in,
+        v_msg_out
+    );
+
+    RETURN v_msg_out;
+END;
+$$;
+```
+
 ## 📌 Observações
 
 Este projeto foi desenvolvido como parte do processo seletivo do LAPES 2026.
