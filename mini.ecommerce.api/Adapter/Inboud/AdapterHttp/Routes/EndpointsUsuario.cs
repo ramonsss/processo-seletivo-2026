@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http.Headers;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Http.Headers;
 using Microsoft.AspNetCore.Mvc;
 using mini.ecommerce.api.Adapter.Inboud.AdapterHttp.Filter;
 using mini.ecommerce.api.Adapter.Inboud.AdapterHttp.Mapper;
@@ -24,6 +25,9 @@ namespace mini.ecommerce.api.Adapter.Inboud.AdapterHttp.Routes
             .AddEndpointFilter<ValidationFilter<LoginRequest>>()
             ;
 
+            app.MapDelete("api/v1/usuario/deletar", DesativarUsuario)
+            .WithTags("Desativar Usuario")
+            .RequireAuthorization();
         }
 
         public static async Task<IResult> CadastraUsuario([FromBody] UsuarioRequest request,
@@ -75,6 +79,38 @@ namespace mini.ecommerce.api.Adapter.Inboud.AdapterHttp.Routes
                     .HandleException(
                         ex,
                         "login-usuario-endpoint");
+            }
+        }
+        
+        public static async Task<IResult> DesativarUsuario(ClaimsPrincipal user,
+                                                           [FromServices] IDesativarUsuarioUseCase useCase)
+        {
+            try
+            {
+                var usuarioIdClaim = user.FindFirst(ClaimTypes.NameIdentifier);
+
+                if (usuarioIdClaim is null)
+                {
+                    return Results.Unauthorized();
+                }
+
+                int usuarioId = int.Parse(usuarioIdClaim.Value);
+
+                var response =
+                    await useCase
+                        .DesativarUsuarioAsync(usuarioId);
+
+                return response.Status ==
+                       EnumStatus.SUCESSO
+                    ? Results.Ok(response)
+                    : Results.BadRequest(response);
+            }
+            catch (Exception ex)
+            {
+                return EndpointHelper
+                    .HandleException(
+                        ex,
+                        "desativar-usuario-endpoint");
             }
         }
     }

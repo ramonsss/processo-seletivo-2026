@@ -12,7 +12,7 @@ public class DesativarUsuarioRepository(IPostgreSQLConnection connection) : IDes
 {
     private readonly IPostgreSQLConnection _connection = connection;
     
-    public async ValueTask<DesativarUsuarioFunctionResponse> LoginUsuario(int usuarioId)
+    public async ValueTask<DesativarUsuarioFunctionResponse> DesativarUsuario(int usuarioId)
     {
         using var activity = Activity.Current?.Source.StartActivity("desativar-usuario-repository");
         using var connection = _connection.ConnectCLUST("PROSEL_LAPES");
