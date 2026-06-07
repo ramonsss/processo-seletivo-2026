@@ -10,11 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9af47948-e6b0-4a53-9cff-5265b1517ef4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.mini.ecommerce.api/.idea/material_theme_project_new.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.mini.ecommerce.api/.idea/material_theme_project_new.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.mini.ecommerce.api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.mini.ecommerce.api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mini.ecommerce.api/Adapter/Outbound/AdapterAuth/Implementations/JwtTokenService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/mini.ecommerce.api/Adapter/Outbound/AdapterAuth/Implementations/JwtTokenService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mini.ecommerce.api/Adapter/Outbound/AdapterAuth/Interfaces/ITokenService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/mini.ecommerce.api/Adapter/Outbound/AdapterAuth/Interfaces/ITokenService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mini.ecommerce.api/Domain/UseCases/Implementations/LoginUsuarioUsecase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/mini.ecommerce.api/Domain/UseCases/Implementations/LoginUsuarioUsecase.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,10 +27,13 @@
     <setting file="file://$PROJECT_DIR$/mini.ecommerce.api/Adapter/Inboud/AdapterHttp/Filter/ValidationFilter.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/mini.ecommerce.api/Adapter/Outbound/AdapterAuth/Implementations/JwtTokenService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/mini.ecommerce.api/Adapter/Outbound/AdapterAuth/Interfaces/ITokenService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/mini.ecommerce.api/Adapter/Outbound/AdapterSql/DTO/Response/DesativarUsuarioFunctionResponse.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/mini.ecommerce.api/Adapter/Outbound/AdapterSql/DTO/Response/LoginFunctionResponse.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/mini.ecommerce.api/Adapter/Outbound/AdapterSql/Implementations/CadastrarUsuarioRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/mini.ecommerce.api/Adapter/Outbound/AdapterSql/Implementations/DesativarUsuarioRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/mini.ecommerce.api/Adapter/Outbound/AdapterSql/Implementations/LoginUsuarioRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/mini.ecommerce.api/Adapter/Outbound/AdapterSql/Interfaces/ICadastrarUsuarioRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/mini.ecommerce.api/Adapter/Outbound/AdapterSql/Interfaces/IDesativarUsuarioRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/mini.ecommerce.api/Adapter/Outbound/AdapterSql/Interfaces/ILoginUsuarioRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/mini.ecommerce.api/Adapter/Outbound/AdapterSql/Settings/CryptSpa.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/mini.ecommerce.api/Adapter/Outbound/AdapterSql/Settings/IPostgreSQLConnection.cs" root0="FORCE_HIGHLIGHTING" />
@@ -149,7 +148,7 @@
       <workItem from="1779838747279" duration="161000" />
       <workItem from="1779839029163" duration="5205000" />
       <workItem from="1780586787928" duration="21984000" />
-      <workItem from="1780846730585" duration="1245000" />
+      <workItem from="1780846730585" duration="1997000" />
     </task>
     <servers />
   </component>
