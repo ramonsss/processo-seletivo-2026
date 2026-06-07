@@ -565,7 +565,7 @@ $$;
 
 ---
 
-### 3.4 — Função e Estrutura de Login
+### 3.4 — Tabela de Refresh Token
 
 ```sql
 CREATE TABLE usuario_refresh_token (
@@ -584,7 +584,13 @@ CREATE TABLE usuario_refresh_token (
 
 CREATE INDEX idx_usuario_refresh_token_usuario_id
 ON usuario_refresh_token(usuario_id);
+```
 
+---
+
+### 3.5 — Função de Login
+
+```sql
 CREATE OR REPLACE FUNCTION fn_usuario_login(
     p_email TEXT,
     p_senha TEXT
@@ -811,6 +817,180 @@ WHEN OTHERS THEN
     RETURN v_msg_out;
 END;
 $$;
+```
+
+---
+
+### 3.6 — Função para desativar usuário
+
+```sql
+CREATE OR REPLACE FUNCTION fn_usuario_desativar(
+    p_usuario_id INT
+)
+RETURNS JSONB
+LANGUAGE plpgsql
+AS $$
+DECLARE
+
+    v_usuario_existe BOOLEAN;
+
+    v_msg_in JSONB;
+    v_msg_out JSONB;
+
+BEGIN
+
+    -- MSG IN
+
+    v_msg_in := jsonb_build_object(
+        'usuarioId', p_usuario_id
+    );
+
+    -- VALIDAÇÃO
+
+    SELECT EXISTS(
+        SELECT 1
+        FROM usuarios
+        WHERE id = p_usuario_id
+    )
+    INTO v_usuario_existe;
+
+    IF NOT v_usuario_existe THEN
+
+        v_msg_out := jsonb_build_object(
+            'Status', 1,
+            'SuccessObject', NULL,
+            'ErrorObject', jsonb_build_object(
+                'tipoErro', 1,
+                'codErro', 404,
+                'msgErro', 'Usuário não encontrado.',
+                'origemErro', 'PostgreSQL'
+            )
+        );
+
+        PERFORM fn_log_evento(
+            p_usuario_id,
+            'DELETE_USER',
+            'ERROR',
+            'Usuário não encontrado',
+            v_msg_in,
+            v_msg_out
+        );
+
+        RETURN v_msg_out;
+
+    END IF;
+
+    -- VERIFICA SE JÁ ESTÁ INATIVO
+
+    IF EXISTS(
+        SELECT 1
+        FROM usuarios
+        WHERE id = p_usuario_id
+          AND ativo = FALSE
+    ) THEN
+
+        v_msg_out := jsonb_build_object(
+            'Status', 1,
+            'SuccessObject', NULL,
+            'ErrorObject', jsonb_build_object(
+                'tipoErro', 1,
+                'codErro', 409,
+                'msgErro', 'Usuário já está desativado.',
+                'origemErro', 'PostgreSQL'
+            )
+        );
+
+        PERFORM fn_log_evento(
+            p_usuario_id,
+            'DELETE_USER',
+            'ERROR',
+            'Usuário já estava desativado',
+            v_msg_in,
+            v_msg_out
+        );
+
+        RETURN v_msg_out;
+
+    END IF;
+
+    -- DESATIVA USUÁRIO
+
+    UPDATE usuarios
+    SET
+        ativo = FALSE,
+        dt_hr_atualizacao = NOW()
+    WHERE id = p_usuario_id;
+
+    -- REVOGA REFRESH TOKENS
+
+    UPDATE usuario_refresh_token
+    SET revogado = TRUE
+    WHERE usuario_id = p_usuario_id
+      AND revogado = FALSE;
+
+    -- MSG OUT SUCESSO
+
+    v_msg_out := jsonb_build_object(
+        'Status', 0,
+        'SuccessObject', jsonb_build_object(
+            'usuarioId', p_usuario_id,
+            'ativo', FALSE,
+            'dataDesativacao', NOW()
+        ),
+        'ErrorObject', NULL
+    );
+
+    -- LOG SUCCESS
+
+    PERFORM fn_log_evento(
+        p_usuario_id,
+        'DELETE_USER',
+        'SUCCESS',
+        'Usuário desativado com sucesso',
+        v_msg_in,
+        v_msg_out
+    );
+
+    RETURN v_msg_out;
+
+-- EXCEPTION
+
+EXCEPTION
+WHEN OTHERS THEN
+
+    v_msg_out := jsonb_build_object(
+        'Status', 2,
+        'SuccessObject', NULL,
+        'ErrorObject', jsonb_build_object(
+            'tipoErro', 2,
+            'codErro', 500,
+            'msgErro', 'Erro interno ao desativar usuário.',
+            'origemErro', 'PostgreSQL'
+        )
+    );
+
+    PERFORM fn_log_evento(
+        p_usuario_id,
+        'DELETE_USER',
+        'ERROR',
+        SQLERRM,
+        v_msg_in,
+        v_msg_out
+    );
+
+    RETURN v_msg_out;
+
+END;
+$$;
+```
+
+---
+
+### 3.7 — Consultas de Validação
+
+```sql
+SELECT * FROM usuarios;
+SELECT * FROM usuario_email;
 ```
 
 ## 📌 Observações
