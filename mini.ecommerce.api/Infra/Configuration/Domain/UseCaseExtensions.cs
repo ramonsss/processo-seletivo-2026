@@ -9,6 +9,7 @@ namespace mini.ecommerce.api.Infra.Configuration.Domain
         {
             services.AddScoped<ICadastrarUsuarioUseCase, CadastrarUsuarioUseCase>();
             services.AddScoped<ILoginUsuarioUsecase, LoginUsuarioUsecase>();
+            services.AddScoped<IDesativarUsuarioUseCase,  DesativarUsuarioUseCase>();
         }
     }
 }
