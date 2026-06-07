@@ -597,6 +597,8 @@ DECLARE
     v_senha_hash TEXT;
 
     v_usuario JSONB;
+	
+	v_usuario_ativo BOOLEAN;
 
     v_refresh_token TEXT;
     v_refresh_expiracao TIMESTAMP;
@@ -612,16 +614,17 @@ v_msg_in := jsonb_build_object(
 );
 
 -- BUSCA USUÁRIO
-SELECT 
+SELECT
     u.id,
     u.senha_hash,
+    u.ativo,
     jsonb_build_object(
         'Id', u.id,
         'nome', u.nome,
         'sobrenome', u.sobrenome,
         'email', e.email,
         'tipoUsuario',
-        CASE 
+        CASE
             WHEN u.tipo_usuario = 'ADMIN' THEN 0
             WHEN u.tipo_usuario = 'CUSTOMER' THEN 1
             ELSE NULL
@@ -631,11 +634,15 @@ SELECT
         'dataNascimento', u.data_nascimento,
         'fotoPerfilUrl', u.foto_perfil_url,
         'Ativo', u.ativo,
-		'ultimoLogin', u.ultimo_login,
+        'ultimoLogin', u.ultimo_login,
         'dtHrCriacao', u.dt_hr_criacao,
         'dtHrAtualizacao', u.dt_hr_atualizacao
     )
-INTO v_usuario_id, v_senha_hash, v_usuario
+INTO
+    v_usuario_id,
+    v_senha_hash,
+    v_usuario_ativo,
+    v_usuario
 FROM usuarios u
 JOIN usuario_email e ON e.usuario_id = u.id
 LEFT JOIN usuario_telefone t ON t.usuario_id = u.id AND t.principal = TRUE
@@ -668,6 +675,33 @@ IF v_usuario_id IS NULL THEN
     RETURN v_msg_out;
 END IF;
 
+-- VALIDA USUÁRIO ATIVO
+IF v_usuario_ativo = FALSE THEN
+
+    v_msg_out := jsonb_build_object(
+        'Status', 1,
+        'SuccessObject', NULL,
+        'ErrorObject', jsonb_build_object(
+            'tipoErro', 1,
+            'codErro', 403,
+            'msgErro', 'Usuário desativado.',
+            'origemErro', 'PostgreSQL'
+        )
+    );
+
+    PERFORM fn_log_evento(
+        v_usuario_id,
+        'LOGIN',
+        'ERROR',
+        'Tentativa de login em usuário desativado',
+        v_msg_in,
+        v_msg_out
+    );
+
+    RETURN v_msg_out;
+
+END IF;
+
 -- VALIDA SENHA
 IF crypt(p_senha, v_senha_hash) <> v_senha_hash THEN
 
@@ -696,14 +730,17 @@ END IF;
 
 -- ATUALIZA ÚLTIMO LOGIN
 UPDATE usuarios
-SET ultimo_login = NOW()
+SET
+    ultimo_login = NOW(),
+    dt_hr_atualizacao = NOW()
 WHERE id = v_usuario_id;
 
--- REVOGA TOKENS ANTIGOS
 UPDATE usuario_refresh_token
 SET revogado = TRUE
 WHERE usuario_id = v_usuario_id
-AND revogado = FALSE;
+  AND revogado = FALSE;
+
+-- REVOGA TOKENS ANTIGOS
 
 -- GERA REFRESH TOKEN
 v_refresh_token := encode(gen_random_bytes(64), 'hex');
