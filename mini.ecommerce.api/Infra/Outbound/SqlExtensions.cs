@@ -12,6 +12,7 @@ namespace mini.ecommerce.api.Infra.Outbound
 
             services.AddScoped<ICadastrarUsuarioRepository, CadastrarUsuarioRepository>();
             services.AddScoped<ILoginUsuarioRepository, LoginUsuarioRepository>();
+            services.AddScoped<IDesativarUsuarioRepository,  DesativarUsuarioRepository>();
         }
     }
 }

@@ -10,10 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9af47948-e6b0-4a53-9cff-5265b1517ef4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.mini.ecommerce.api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.mini.ecommerce.api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mini.ecommerce.api/Adapter/Inboud/AdapterHttp/Routes/EndpointsUsuario.cs" beforeDir="false" afterPath="$PROJECT_DIR$/mini.ecommerce.api/Adapter/Inboud/AdapterHttp/Routes/EndpointsUsuario.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mini.ecommerce.api/Adapter/Outbound/AdapterSql/Implementations/DesativarUsuarioRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/mini.ecommerce.api/Adapter/Outbound/AdapterSql/Implementations/DesativarUsuarioRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mini.ecommerce.api/Adapter/Outbound/AdapterSql/Interfaces/IDesativarUsuarioRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/mini.ecommerce.api/Adapter/Outbound/AdapterSql/Interfaces/IDesativarUsuarioRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mini.ecommerce.api/Infra/Outbound/SqlExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/mini.ecommerce.api/Infra/Outbound/SqlExtensions.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,7 +150,7 @@
       <workItem from="1779838747279" duration="161000" />
       <workItem from="1779839029163" duration="5205000" />
       <workItem from="1780586787928" duration="21984000" />
-      <workItem from="1780846730585" duration="3389000" />
+      <workItem from="1780846730585" duration="3709000" />
     </task>
     <servers />
   </component>
