@@ -15,7 +15,7 @@ public class JwtTokenService : ITokenService
         _key = Encoding.ASCII.GetBytes("dAWG7KP2xpHPN8aU1GfC82OkOqwXSz5w");
     }
 
-    public string GenerateToken(string email, string role)
+    public string GenerateToken(int usuarioId, string email, string role)
     {
         var handler = new JwtSecurityTokenHandler();
 
@@ -23,6 +23,7 @@ public class JwtTokenService : ITokenService
         {
             Subject = new ClaimsIdentity(new[]
             {
+                new Claim(ClaimTypes.NameIdentifier, usuarioId.ToString()),
                 new Claim(ClaimTypes.Email, email),
                 new Claim(ClaimTypes.Role, role)
             }),

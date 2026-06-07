@@ -28,8 +28,9 @@ public class LoginUsuarioUsecase(IServiceProvider serviceProvider) : ILoginUsuar
         var usuario = response.SuccessObject.usuario;
 
         var token = _tokenService.GenerateToken(
-            usuario.email,
-            usuario.tipoUsuario.ToString()
+            usuario.Id!.Value,
+            usuario.email!,
+            usuario.tipoUsuario!.ToString()
         );
 
         return BaseReturn<LoginResponse>.Success(new LoginResponse
