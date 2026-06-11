@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Marketplace - MemeQuest</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "background": "#14121f",
+                        "outline-variant": "#4a4455",
+                        "on-tertiary-fixed": "#2c0051",
+                        "primary-fixed-dim": "#d2bbff",
+                        "on-tertiary-container": "#f2dfff",
+                        "surface-variant": "#363342",
+                        "on-background": "#e5e0f3",
+                        "surface-tint": "#d2bbff",
+                        "inverse-surface": "#e5e0f3",
+                        "on-surface": "#e5e0f3",
+                        "surface-dim": "#14121f",
+                        "surface-container-high": "#2b2836",
+                        "secondary-container": "#e3aa00",
+                        "on-secondary": "#402d00",
+                        "outline": "#958da1",
+                        "on-tertiary-fixed-variant": "#6900b3",
+                        "inverse-on-surface": "#312f3d",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-low": "#1c1a27",
+                        "on-primary-fixed-variant": "#5a00c6",
+                        "secondary": "#ffc640",
+                        "on-primary-container": "#ede0ff",
+                        "on-error": "#690005",
+                        "tertiary-container": "#8d36db",
+                        "tertiary": "#ddb7ff",
+                        "primary-fixed": "#eaddff",
+                        "surface-container-lowest": "#0e0c19",
+                        "on-primary": "#3f008e",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "surface-bright": "#3a3746",
+                        "on-secondary-container": "#5a4100",
+                        "tertiary-fixed": "#f0dbff",
+                        "error": "#ffb4ab",
+                        "secondary-fixed": "#ffdf9f",
+                        "on-surface-variant": "#ccc3d8",
+                        "on-secondary-fixed": "#261a00",
+                        "primary-container": "#7c3aed",
+                        "primary": "#d2bbff",
+                        "surface-container-highest": "#363342",
+                        "on-tertiary": "#490080",
+                        "secondary-fixed-dim": "#f9bd22",
+                        "error-container": "#93000a",
+                        "surface-container": "#201e2c",
+                        "surface": "#14121f",
+                        "on-primary-fixed": "#25005a",
+                        "inverse-primary": "#732ee4",
+                        "tertiary-fixed-dim": "#ddb7ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "lg": "2rem",
+                        "sm": "1rem",
+                        "margin-mobile": "16px",
+                        "xs": "0.5rem",
+                        "base": "4px",
+                        "xl": "4rem",
+                        "md": "1.5rem",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Montserrat"],
+                        "display-lg": ["Montserrat"],
+                        "body-lg": ["Inter"],
+                        "stats-number": ["Montserrat"],
+                        "headline-lg-mobile": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "stats-number": ["20px", { "lineHeight": "24px", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glow-ssr { box-shadow: 0 0 20px rgba(251, 191, 36, 0.3); }
+        .glow-sr { box-shadow: 0 0 20px rgba(124, 58, 237, 0.3); }
+        .glow-r { box-shadow: 0 0 15px rgba(59, 130, 246, 0.2); }
+        .glow-c { box-shadow: 0 0 10px rgba(156, 163, 175, 0.1); }
+        
+        .card-inner {
+            background: linear-gradient(180deg, rgba(26,22,46,0) 0%, rgba(26,22,46,0.9) 100%);
+        }
+        
+        /* Custom Scrollbar for Filters */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(20, 18, 31, 0.5);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(124, 58, 237, 0.5);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen pt-20">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-surface-variant/20 shadow-sm transition-all duration-300 ease-in-out flex justify-between items-center px-margin-desktop h-20">
+<div class="flex items-center gap-lg">
+<span class="font-display-lg text-headline-md tracking-tighter text-primary">MEMEQUEST</span>
+<div class="hidden md:flex gap-md font-body-md text-body-md">
+<a class="text-primary font-bold border-b-2 border-primary pb-1" href="#">Marketplace</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors hover:bg-primary-container/10 px-2 py-1 rounded" href="#">Inventory</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors hover:bg-primary-container/10 px-2 py-1 rounded" href="#">Trade</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors hover:bg-primary-container/10 px-2 py-1 rounded" href="#">Leaderboard</a>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<button class="hidden md:flex items-center gap-2 bg-primary-container text-on-primary-container px-4 py-2 rounded-lg font-label-md text-label-md hover:opacity-90 transition-opacity">
+                Connect Wallet
+            </button>
+<div class="flex gap-2">
+<button class="text-primary hover:bg-primary-container/10 p-2 rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</button>
+<button class="text-primary hover:bg-primary-container/10 p-2 rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined">person_outline</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-20 h-screen w-64 bg-surface-container-low border-r border-surface-variant/10 hidden lg:flex flex-col p-md space-y-base overflow-y-auto">
+<div class="mb-lg">
+<h2 class="font-headline-md text-headline-md text-primary">Filters</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Refine Search</p>
+</div>
+<nav class="flex-1 space-y-2">
+<button class="w-full flex items-center gap-3 p-3 bg-primary-container text-on-primary-container rounded-lg font-bold transition-transform scale-95">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">diamond</span>
+<span>Rarity</span>
+</button>
+<div class="pl-10 space-y-2 pb-4">
+<label class="flex items-center gap-2 text-on-surface-variant font-label-md text-label-md hover:text-primary cursor-pointer">
+<input class="form-checkbox bg-surface border-outline-variant text-primary rounded focus:ring-primary focus:ring-offset-background" type="checkbox"/>
+                    Common (C)
+                </label>
+<label class="flex items-center gap-2 text-on-surface-variant font-label-md text-label-md hover:text-primary cursor-pointer">
+<input class="form-checkbox bg-surface border-outline-variant text-primary rounded focus:ring-primary focus:ring-offset-background" type="checkbox"/>
+                    Rare (R)
+                </label>
+<label class="flex items-center gap-2 text-on-surface-variant font-label-md text-label-md hover:text-primary cursor-pointer">
+<input class="form-checkbox bg-surface border-outline-variant text-primary rounded focus:ring-primary focus:ring-offset-background" type="checkbox"/>
+                    Super Rare (SR)
+                </label>
+<label class="flex items-center gap-2 text-on-surface-variant font-label-md text-label-md hover:text-primary cursor-pointer">
+<input class="form-checkbox bg-surface border-outline-variant text-primary rounded focus:ring-primary focus:ring-offset-background" type="checkbox"/>
+                    SSR
+                </label>
+</div>
+<button class="w-full flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-variant rounded-lg hover:bg-surface-bright transition-colors">
+<span class="material-symbols-outlined">payments</span>
+<span>Price Range</span>
+</button>
+<button class="w-full flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-variant rounded-lg hover:bg-surface-bright transition-colors">
+<span class="material-symbols-outlined">auto_awesome_motion</span>
+<span>Collections</span>
+</button>
+<button class="w-full flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-variant rounded-lg hover:bg-surface-bright transition-colors">
+<span class="material-symbols-outlined">palette</span>
+<span>Artist</span>
+</button>
+<button class="w-full flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-variant rounded-lg hover:bg-surface-bright transition-colors">
+<span class="material-symbols-outlined">history</span>
+<span>Era</span>
+</button>
+</nav>
+<div class="mt-auto pt-lg border-t border-surface-variant/20">
+<button class="w-full bg-primary-container text-on-primary-container font-label-md text-label-md py-3 rounded-lg hover:opacity-90 transition-opacity">
+                Apply Filters
+            </button>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="lg:ml-64 p-margin-mobile md:p-margin-desktop min-h-screen flex flex-col">
+<!-- Header & Search -->
+<header class="mb-lg flex flex-col md:flex-row justify-between items-start md:items-end gap-md">
+<div>
+<h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-2">Marketplace</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Discover, buy, and trade rare meme artifacts.</p>
+</div>
+<div class="relative w-full md:w-96">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline-variant">search</span>
+<input class="w-full bg-surface-container-high border border-outline-variant/30 text-on-surface font-body-md text-body-md rounded-lg py-3 pl-10 pr-4 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all placeholder:text-outline-variant" placeholder="Search memes, collections..." type="text"/>
+</div>
+</header>
+<!-- Sorting Bar -->
+<div class="flex flex-col sm:flex-row justify-between items-center bg-surface-container-low p-3 rounded-lg border border-surface-variant/20 mb-lg gap-4">
+<div class="text-on-surface-variant font-body-md text-body-md">
+                Showing <span class="text-primary font-bold">12</span> of <span class="text-on-surface font-bold">1,204</span> results
+            </div>
+<div class="flex items-center gap-3">
+<span class="text-outline-variant font-label-md text-label-md">Sort by:</span>
+<select class="bg-surface border border-outline-variant/30 text-on-surface font-label-md text-label-md rounded px-3 py-1.5 focus:outline-none focus:border-primary">
+<option>Most Popular</option>
+<option>Lowest Price</option>
+<option>Highest Price</option>
+<option>Highest Rarity</option>
+</select>
+</div>
+</div>
+<!-- Grid -->
+<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-gutter flex-1">
+<!-- Card 1 (SSR) -->
+<article class="group relative bg-[#1A162E] rounded-xl overflow-hidden border border-surface-variant/10 glow-ssr transition-transform duration-300 hover:-translate-y-2 cursor-pointer flex flex-col aspect-[2/3]">
+<div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#14121f] z-10 opacity-60"></div>
+<div class="absolute top-2 right-2 z-20">
+<span class="bg-secondary-container text-on-secondary font-label-md text-xs px-2 py-1 rounded-full animate-pulse border border-secondary shadow-[0_0_10px_rgba(251,191,36,0.5)]">SSR</span>
+</div>
+<div class="absolute top-2 left-2 z-20">
+<span class="bg-surface/80 text-on-surface font-stats-number text-xs px-2 py-1 rounded-full backdrop-blur-sm border border-surface-variant/30">#001/500</span>
+</div>
+<div class="flex-1 relative overflow-hidden">
+<img alt="Card Image" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A stylized, neon-noir digital trading card illustration featuring a famous meme cat. The cat is rendered in a highly detailed, cyberpunk-infused aesthetic with glowing purple and gold accents. The background is a dark, abstract geometric void, emphasizing the subject's rarity. The lighting is dramatic, casting deep shadows and highlighting the glowing elements, fitting a premium digital collectible marketplace." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3d7OY6w3FcgvheXQEujWRAtqXtbRZRiNNCV0-s4DEUuXKTia-2Syg-0SQuDPUfpeyAk7oe5ag3CokoOa7X-rusPcGxpl11LMtyUoLrWuAaFkmuP7-YrF6pn79iJwfpgPZfc7bV5hm-4T3XP_JFhj5IzRjHsdBR-Vgs427bA9SzdyfUX0Ma4cj5YrPQzACNqEpuAx6sz50FiT0_Oh_FG90TeDITnEsWLMLrevPY8BMIEJXmiTOaT3EYz38tfm4p57StCjVR_Iio2o"/>
+</div>
+<div class="relative z-20 p-3 pt-0 mt-[-40px] card-inner flex flex-col justify-end h-[100px]">
+<h3 class="font-headline-md text-body-md md:text-headline-md text-on-surface truncate">Gato Policarpo</h3>
+<div class="flex justify-between items-end mt-1">
+<div>
+<span class="text-outline-variant text-xs block">Price</span>
+<span class="font-stats-number text-lg text-secondary">R$ 1.499,90</span>
+</div>
+<span class="text-outline-variant text-xs">Estoque: 2</span>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 w-full p-2 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-30 bg-background/90 backdrop-blur-md border-t border-surface-variant/30">
+<button class="w-full bg-gradient-to-r from-secondary-container to-secondary text-on-secondary font-label-md text-label-md py-2 rounded font-bold hover:brightness-110 transition-all">
+                        Buy Now
+                    </button>
+</div>
+</article>
+<!-- Card 2 (SR) -->
+<article class="group relative bg-[#1A162E] rounded-xl overflow-hidden border border-surface-variant/10 glow-sr transition-transform duration-300 hover:-translate-y-2 cursor-pointer flex flex-col aspect-[2/3]">
+<div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#14121f] z-10 opacity-60"></div>
+<div class="absolute top-2 right-2 z-20">
+<span class="bg-primary-container text-on-primary-container font-label-md text-xs px-2 py-1 rounded-full border border-primary shadow-[0_0_10px_rgba(124,58,237,0.3)]">SR</span>
+</div>
+<div class="absolute top-2 left-2 z-20">
+<span class="bg-surface/80 text-on-surface font-stats-number text-xs px-2 py-1 rounded-full backdrop-blur-sm border border-surface-variant/30">#042/1000</span>
+</div>
+<div class="flex-1 relative overflow-hidden">
+<img alt="Card Image" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A premium digital collectible card artwork showcasing a surreal, internet-culture-inspired scene. The composition features a confused-looking person surrounded by floating digital artifacts and error messages in a synthwave color palette. Deep blacks contrast with electric purple and cyan glows, creating a moody, tech-forward atmosphere. The aesthetic is modern, minimalist, yet highly detailed, appropriate for a high-end NFT or meme trading card platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdgfB-4UWXAOgj4ZEMyOUNP8hO70TdMI6JeZb9sT9Vc-CQBd8XIOIbCeBcwDbwo5QpxRsy9tSaRs4JTEhl4sjZiPgRbBwkhmv8Nbh9o5BTJCGz-2q-ujwKw2xtMCckh-Lqn4sxl61Tx7wL9ycKOvSLHxN4ariUTAxx9ITmBLhkPYsDX3IbQBeeV9uF_lp7horBqR3EGwrDGtbycmQ6rE4WsN44YmG2d5EAZAod-OqT9PddPe0NTaU1sfLqWOiRWokIB5eBCNTWT2U"/>
+</div>
+<div class="relative z-20 p-3 pt-0 mt-[-40px] card-inner flex flex-col justify-end h-[100px]">
+<h3 class="font-headline-md text-body-md md:text-headline-md text-on-surface truncate">Nazaré Tedesco</h3>
+<div class="flex justify-between items-end mt-1">
+<div>
+<span class="text-outline-variant text-xs block">Price</span>
+<span class="font-stats-number text-lg text-primary">R$ 299,90</span>
+</div>
+<span class="text-outline-variant text-xs">Estoque: 14</span>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 w-full p-2 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-30 bg-background/90 backdrop-blur-md border-t border-surface-variant/30">
+<button class="w-full bg-primary-container text-on-primary-container font-label-md text-label-md py-2 rounded font-bold hover:bg-primary transition-colors">
+                        Add to Cart
+                    </button>
+</div>
+</article>
+<!-- Card 3 (R) -->
+<article class="group relative bg-[#1A162E] rounded-xl overflow-hidden border border-surface-variant/10 glow-r transition-transform duration-300 hover:-translate-y-2 cursor-pointer flex flex-col aspect-[2/3]">
+<div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#14121f] z-10 opacity-60"></div>
+<div class="absolute top-2 right-2 z-20">
+<span class="bg-blue-900/50 text-blue-200 font-label-md text-xs px-2 py-1 rounded-full border border-blue-500/50">R</span>
+</div>
+<div class="absolute top-2 left-2 z-20">
+<span class="bg-surface/80 text-on-surface font-stats-number text-xs px-2 py-1 rounded-full backdrop-blur-sm border border-surface-variant/30">#150/5000</span>
+</div>
+<div class="flex-1 relative overflow-hidden">
+<img alt="Card Image" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Digital art for a trading card depicting a dramatic, low-angle shot of an everyday object elevated to meme status, specifically a plain white plastic chair. The lighting is cinematic, casting long, sharp shadows against a deep, dark purple background with subtle grid textures. The overall mood is ironically epic, blending internet irreverence with a sleek, premium neo-noir visual style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC15WXDXmA7UC1Xd_eselUwQgcpIkaWn9qOTaxGJlxefRygPdNgC54ihxZVVnJ3Fvc7WkAHRAd1hzz4oksQZhm9n3eEhiC0J8Mq24VnNSZoyJwQuoVGQrJ4PrLY4O685-tNWYRH8_9dviBbfSg3XbRdE4SfjdMLTY69yUM2PdcX-E3bZQHEP16FERS7Pm5SUUTyrrqP0VpWRe4-vivl3W_fdYoDB7PB_IxEevnG9Sjkq_rZg_wld1QnuysBXFkk1kokPoqGpLHpDoA"/>
+</div>
+<div class="relative z-20 p-3 pt-0 mt-[-40px] card-inner flex flex-col justify-end h-[100px]">
+<h3 class="font-headline-md text-body-md md:text-headline-md text-on-surface truncate">Cadeira de Plástico</h3>
+<div class="flex justify-between items-end mt-1">
+<div>
+<span class="text-outline-variant text-xs block">Price</span>
+<span class="font-stats-number text-lg text-blue-300">R$ 89,90</span>
+</div>
+<span class="text-outline-variant text-xs">Estoque: 45</span>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 w-full p-2 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-30 bg-background/90 backdrop-blur-md border-t border-surface-variant/30">
+<button class="w-full border border-primary text-primary font-label-md text-label-md py-2 rounded font-bold hover:bg-primary/10 transition-colors">
+                        Add to Cart
+                    </button>
+</div>
+</article>
+<!-- Card 4 (C) -->
+<article class="group relative bg-[#1A162E] rounded-xl overflow-hidden border border-surface-variant/10 glow-c transition-transform duration-300 hover:-translate-y-2 cursor-pointer flex flex-col aspect-[2/3]">
+<div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#14121f] z-10 opacity-60"></div>
+<div class="absolute top-2 right-2 z-20">
+<span class="bg-surface-variant text-on-surface-variant font-label-md text-xs px-2 py-1 rounded-full border border-outline-variant/50">C</span>
+</div>
+<div class="absolute top-2 left-2 z-20">
+<span class="bg-surface/80 text-on-surface font-stats-number text-xs px-2 py-1 rounded-full backdrop-blur-sm border border-surface-variant/30">#890/10000</span>
+</div>
+<div class="flex-1 relative overflow-hidden">
+<img alt="Card Image" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A minimalist digital trading card illustration featuring a mundane scene transformed into a collectible asset. It shows a simple, pixelated representation of a classic internet error screen or basic meme template. The color palette is muted, relying on grays, deep blacks, and desaturated purples. The aesthetic is clean, stark, and slightly retro, fitting the 'Common' rarity tier of a digital card game." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfxC2HN6loDej7RQmNMgSI--LEKLpG8gU4_Rqa-ATDdDNQFf_60rlIKRyZvugaZNEV2SOjiFXYBpCsBXpjIbLvO-lo7D1n5xR7mF_aae1P6i_XCXN2a0zoPg-4O1yJ6OG1adJxEJkrNQIogLZ4ezQACAZqNJABlYhH02OQhsEUnF4uzVdxrmrnfymP4ovMyf6l4IKAuqTvZshA7KOqkyNnD1l1gn587IHTn6TgIavf-Nm4knshVLOzvDefU9pA3iuINlJBBS9AY2w"/>
+</div>
+<div class="relative z-20 p-3 pt-0 mt-[-40px] card-inner flex flex-col justify-end h-[100px]">
+<h3 class="font-headline-md text-body-md md:text-headline-md text-on-surface truncate">Erro 404</h3>
+<div class="flex justify-between items-end mt-1">
+<div>
+<span class="text-outline-variant text-xs block">Price</span>
+<span class="font-stats-number text-lg text-on-surface">R$ 19,90</span>
+</div>
+<span class="text-outline-variant text-xs">Estoque: 120</span>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 w-full p-2 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-30 bg-background/90 backdrop-blur-md border-t border-surface-variant/30">
+<button class="w-full border border-outline-variant text-on-surface font-label-md text-label-md py-2 rounded font-bold hover:bg-surface-variant transition-colors">
+                        Add to Cart
+                    </button>
+</div>
+</article>
+</div>
+<!-- Pagination -->
+<div class="mt-xl flex justify-center items-center gap-2 pb-lg">
+<button class="p-2 rounded border border-surface-variant/30 text-outline-variant hover:text-on-surface hover:bg-surface-variant transition-colors disabled:opacity-50">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded bg-primary-container text-on-primary-container font-bold text-sm flex items-center justify-center">1</button>
+<button class="w-8 h-8 rounded border border-surface-variant/30 text-on-surface-variant hover:bg-surface-variant transition-colors text-sm flex items-center justify-center">2</button>
+<button class="w-8 h-8 rounded border border-surface-variant/30 text-on-surface-variant hover:bg-surface-variant transition-colors text-sm flex items-center justify-center">3</button>
+<span class="text-outline-variant">...</span>
+<button class="w-8 h-8 rounded border border-surface-variant/30 text-on-surface-variant hover:bg-surface-variant transition-colors text-sm flex items-center justify-center">24</button>
+<button class="p-2 rounded border border-surface-variant/30 text-outline-variant hover:text-on-surface hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</main>
+<!-- Footer -->
+<footer class="lg:ml-64 w-full py-xl bg-surface-container-lowest border-t border-surface-variant/20 flex flex-col md:flex-row justify-between items-center px-margin-desktop gap-md z-40 relative">
+<div class="text-on-surface font-black font-display-lg text-lg">MEMEQUEST</div>
+<div class="font-label-md text-label-md text-outline text-center">
+            © 2024 MemeQuest Brazil. All rights reserved. Irreverent Digital Assets.
+        </div>
+<div class="flex gap-4 font-label-md text-label-md">
+<a class="text-outline-variant hover:text-on-surface transition-colors" href="#">Terms</a>
+<a class="text-outline-variant hover:text-on-surface transition-colors" href="#">Privacy</a>
+<a class="text-outline-variant hover:text-on-surface transition-colors" href="#">Discord</a>
+<a class="text-outline-variant hover:text-on-surface transition-colors" href="#">Support</a>
+</div>
+</footer>
+</body></html>

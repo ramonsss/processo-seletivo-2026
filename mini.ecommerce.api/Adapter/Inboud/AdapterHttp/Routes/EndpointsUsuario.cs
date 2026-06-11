@@ -1,5 +1,12 @@
-﻿using Microsoft.AspNetCore.Http.Headers;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Http.Headers;
 using Microsoft.AspNetCore.Mvc;
+using mini.ecommerce.api.Adapter.Inboud.AdapterHttp.Filter;
+using mini.ecommerce.api.Adapter.Inboud.AdapterHttp.Mapper;
+using mini.ecommerce.api.Domain.Core.Enums;
+using mini.ecommerce.api.Domain.Core.Model.DTO;
+using mini.ecommerce.api.Domain.Core.Model.VM.Request;
+using mini.ecommerce.api.Domain.UseCase.Interfaces;
 
 namespace mini.ecommerce.api.Adapter.Inboud.AdapterHttp.Routes
 {
@@ -7,13 +14,104 @@ namespace mini.ecommerce.api.Adapter.Inboud.AdapterHttp.Routes
     {
         public static void AddEndpointAcessoUsuario(this IEndpointRouteBuilder app)
         {
-            app.MapPost("api/v1/teste", Teste);
+            app.MapPost("api/v1/usuario", CadastraUsuario)
+            .WithTags("Cadastrar Usuario")
+            .AddEndpointFilter<ValidationFilter<UsuarioRequest>>()
+            //.RequireAuthorization()
+            ;
 
+            app.MapPost("api/v1/usuario/login", LoginUsuario)
+            .WithTags("Login Usuario")
+            .AddEndpointFilter<ValidationFilter<LoginRequest>>()
+            ;
+
+            app.MapDelete("api/v1/usuario/deletar", DesativarUsuario)
+            .WithTags("Desativar Usuario")
+            .RequireAuthorization();
         }
 
-        public static async Task<IResult> Teste()
+        public static async Task<IResult> CadastraUsuario([FromBody] UsuarioRequest request,
+                                                          [FromHeader(Name = "Chave-Idempotencia")] string? chaveIdempotencia,
+                                                          [FromServices] ICadastrarUsuarioUseCase useCase)
         {
-            return Results.Ok();
+            chaveIdempotencia ??= Guid.NewGuid().ToString();
+
+            request.header ??= new HttpRequestHeader();
+
+            request.header.chaveIdempotencia = chaveIdempotencia;
+            
+            request.header!.chaveIdempotencia = chaveIdempotencia;
+            try
+            {
+                
+                var response = await useCase.CadastraUsuarioAsync(request);
+
+                return response.Status ==
+                       Domain.Core.Enums.EnumStatus.SUCESSO
+                    ? Results.Ok(response)
+                    : Results.BadRequest(response);
+            }
+            catch (Exception ex)
+            {
+                return EndpointHelper
+                    .HandleException(
+                        ex,
+                        "cadastrar-usuario-endpoint");
+            }
+        }
+
+        public static async Task<IResult> LoginUsuario([FromBody] LoginRequest request, 
+                                                       [FromServices] ILoginUsuarioUsecase usecase)
+        {
+            try
+            {
+                
+                var response = await usecase.LoginUsuarioAsync(request);
+
+                return response.Status ==
+                       Domain.Core.Enums.EnumStatus.SUCESSO
+                    ? Results.Ok(response)
+                    : Results.BadRequest(response);
+            }
+            catch (Exception ex)
+            {
+                return EndpointHelper
+                    .HandleException(
+                        ex,
+                        "login-usuario-endpoint");
+            }
+        }
+        
+        public static async Task<IResult> DesativarUsuario(ClaimsPrincipal user,
+                                                           [FromServices] IDesativarUsuarioUseCase useCase)
+        {
+            try
+            {
+                var usuarioIdClaim = user.FindFirst(ClaimTypes.NameIdentifier);
+
+                if (usuarioIdClaim is null)
+                {
+                    return Results.Unauthorized();
+                }
+
+                int usuarioId = int.Parse(usuarioIdClaim.Value);
+
+                var response =
+                    await useCase
+                        .DesativarUsuarioAsync(usuarioId);
+
+                return response.Status ==
+                       EnumStatus.SUCESSO
+                    ? Results.Ok(response)
+                    : Results.BadRequest(response);
+            }
+            catch (Exception ex)
+            {
+                return EndpointHelper
+                    .HandleException(
+                        ex,
+                        "desativar-usuario-endpoint");
+            }
         }
     }
 }

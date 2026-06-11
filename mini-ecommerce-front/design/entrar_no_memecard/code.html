@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MemeCard - Autenticação</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 1,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "primary-fixed-dim": "#d2bbff",
+                      "secondary-fixed": "#ffdf9f",
+                      "on-secondary-container": "#5a4100",
+                      "on-secondary-fixed-variant": "#5c4300",
+                      "primary": "#d2bbff",
+                      "on-tertiary-fixed-variant": "#6900b3",
+                      "tertiary-fixed-dim": "#ddb7ff",
+                      "error": "#ffb4ab",
+                      "surface-container-high": "#2b2836",
+                      "on-surface-variant": "#ccc3d8",
+                      "on-primary-container": "#ede0ff",
+                      "surface-container-low": "#1c1a27",
+                      "on-error": "#690005",
+                      "on-background": "#e5e0f3",
+                      "tertiary-container": "#8d36db",
+                      "background": "#14121f",
+                      "on-tertiary-fixed": "#2c0051",
+                      "on-secondary-fixed": "#261a00",
+                      "secondary-container": "#e3aa00",
+                      "on-primary-fixed": "#25005a",
+                      "secondary": "#ffc640",
+                      "primary-container": "#7c3aed",
+                      "surface": "#14121f",
+                      "on-tertiary": "#490080",
+                      "on-error-container": "#ffdad6",
+                      "inverse-on-surface": "#312f3d",
+                      "error-container": "#93000a",
+                      "inverse-surface": "#e5e0f3",
+                      "secondary-fixed-dim": "#f9bd22",
+                      "tertiary": "#ddb7ff",
+                      "surface-container-highest": "#363342",
+                      "tertiary-fixed": "#f0dbff",
+                      "surface-dim": "#14121f",
+                      "primary-fixed": "#eaddff",
+                      "outline-variant": "#4a4455",
+                      "inverse-primary": "#732ee4",
+                      "outline": "#958da1",
+                      "on-primary-fixed-variant": "#5a00c6",
+                      "on-tertiary-container": "#f2dfff",
+                      "surface-tint": "#d2bbff",
+                      "surface-bright": "#3a3746",
+                      "surface-variant": "#363342",
+                      "surface-container-lowest": "#0e0c19",
+                      "on-primary": "#3f008e",
+                      "on-surface": "#e5e0f3",
+                      "surface-container": "#201e2c",
+                      "on-secondary": "#402d00"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "xs": "0.5rem",
+                      "md": "1.5rem",
+                      "gutter": "24px",
+                      "sm": "1rem",
+                      "base": "4px",
+                      "xl": "4rem",
+                      "lg": "2rem",
+                      "margin-mobile": "16px",
+                      "margin-desktop": "64px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": ["Montserrat"],
+                      "headline-lg": ["Montserrat"],
+                      "display-lg": ["Montserrat"],
+                      "headline-md": ["Montserrat"],
+                      "body-md": ["Inter"],
+                      "stats-number": ["Montserrat"],
+                      "label-md": ["Inter"],
+                      "body-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "stats-number": ["20px", {"lineHeight": "24px", "fontWeight": "700"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+              }
+            }
+          }
+        }
+    </script>
+</head>
+<body class="bg-surface-container-lowest text-on-surface font-body-md min-h-screen flex items-center justify-center p-md overflow-hidden relative selection:bg-primary-container selection:text-white">
+<!-- Subtle Background Elements -->
+<div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+<div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 blur-[120px] rounded-full"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[30%] h-[30%] bg-secondary/5 blur-[100px] rounded-full"></div>
+</div>
+<!-- Auth Modal Container -->
+<div class="bg-surface-container-low rounded-xl border border-outline-variant/10 shadow-2xl flex flex-col md:flex-row w-full max-w-[1200px] h-[800px] max-h-[921px] z-10 overflow-hidden relative backdrop-blur-sm">
+<!-- Left Panel: Brand & Visuals (Hidden on small screens) -->
+<div class="hidden md:flex flex-col w-1/2 p-xl relative overflow-hidden bg-gradient-to-br from-surface-container-low to-surface-container-lowest border-r border-outline-variant/10">
+<!-- Brand -->
+<div class="z-20">
+<h1 class="font-display-lg text-display-lg text-primary tracking-tighter mb-base">MemeCard</h1>
+<p class="font-headline-md text-headline-md text-on-surface-variant">Colecione. Troque. Domine.</p>
+</div>
+<!-- Floating Cards Visual -->
+<div class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none mt-xl">
+<!-- Card 1 (Back) -->
+<div class="absolute w-[240px] h-[360px] bg-surface-container rounded-xl border border-outline-variant/20 shadow-lg transform -rotate-12 translate-x-[-100px] translate-y-[-20px] opacity-60">
+<img alt="Meme Card Art" class="w-full h-full object-cover rounded-xl" data-alt="A stylized trading card featuring a vibrant retro arcade machine in a neon-lit cyber city. Deep purple and gold accents highlight the card's rarity. The aesthetic is digital-first, neon-noir, and highly collectible. High quality, detailed illustration." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBl6u8D0fv2K83_NFv_W7FVaJnyHeiFdQU4mFx3lm95suUQVvJ0aR-JpdE-UfnBkuuos7xiFyk05WgkCcYVbyabNVFuM3pjOyVpBUgQo96qISMNabOcJLTQGS5goRxACqQOT-S-sZo2wNVDfqiC-TKyMW2FiDLHBOY4uEeGphIX-IhlvWbIdpQUwBKkZkdlC-3xJXCiU4W-VFBK0sEakIJWhj3TWJsGVKNZg6ldBP2jySIZ7j-7sY-UAJfvfWeJkzyhTFYMlFM9EBU"/>
+</div>
+<!-- Card 2 (Back Right) -->
+<div class="absolute w-[240px] h-[360px] bg-surface-container rounded-xl border border-outline-variant/20 shadow-lg transform rotate-12 translate-x-[100px] translate-y-[20px] opacity-60">
+<img alt="Meme Card Art" class="w-full h-full object-cover rounded-xl" data-alt="A high-energy digital trading card showing a chaotic, internet-meme inspired character in a glitch-art style. Features striking electric purple and deep black tones, giving a modern, premium feel. Irreverent yet sophisticated design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQnRG6kKzOKU5SltDqZtVzvwWBVgbaO1tq7pndovLgTgrWzjWWbMoXFTutJt2q48zmM1RvHhQYiiq_4i9tJgk4lN-X7hKdHLQ5icvfU6qrSLUaSTLbUjZrY-Fu5-O_sojBmiCI1Qxpzs6ZeYVvOuT9sa0OuKgfZec8a3pUAEAOGJDPPGdrg7FWcoWXrre1sUsrmwgz6joJztodcqOHCpN2A6t7zL32eXuB5KkQfrahPLQp1kP2ieuWGrYHrAQ01FF6Vnk3Zh57jOk"/>
+</div>
+<!-- Card 3 (Hero Front) -->
+<div class="absolute w-[280px] h-[420px] bg-surface rounded-xl border-2 border-primary/50 shadow-[0_0_30px_rgba(124,58,237,0.3)] transform translate-y-[-10px] z-20 flex flex-col relative overflow-hidden">
+<!-- Gradient Overlay -->
+<div class="absolute inset-0 bg-gradient-to-b from-transparent to-background z-10"></div>
+<!-- Rarity Tag -->
+<div class="absolute top-sm right-sm bg-gradient-to-r from-secondary to-secondary-fixed text-on-secondary-fixed font-label-md text-label-md px-xs py-[2px] rounded-full z-20 shadow-[0_0_15px_rgba(251,191,36,0.5)]">
+                        SSR
+                    </div>
+<img alt="Hero Meme Card" class="w-full h-[60%] object-cover" data-alt="A premium SSR tier digital trading card featuring a glowing, holographic depiction of a legendary internet icon. Set against a deep, dark neon-noir background with intense electric purple and gold highlights. Highly detailed, glassmorphic card borders, conveying immense value and exclusivity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwDG_zv2pVpuAOa4penn4NwMtG-zIC3UdNhWUg4K4Cdi8rYRHw_Y3j5OKqag0Zy5IzPMR18HZEt1OFDVLUKte8TpW63UCH6KWi4b3n7cZkhs1VLrlMOX84bS7bNCHl87hckNQxpPQm7BJwqdG3SJ7UpW3Nom_S6alp9VdokMo_P6-4iPCNZj0uI7V63bckfgRXHYdIgwgOuZ1WtdSLNASE7cCYuhZC17GBZXokwUMQRE5LAPFyO7DiqtZ0PYrk_TQ45bsHa7gSRSA"/>
+<div class="p-sm z-20 relative h-[40%] flex flex-col justify-end">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-base truncate">O Lendário Doge</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm mb-sm line-clamp-2">Uma relíquia da era de ouro da internet. Aumenta a sorte em 200%.</p>
+<div class="flex justify-between items-center mt-auto border-t border-outline-variant/20 pt-sm">
+<div class="flex items-center gap-xs text-secondary">
+<span class="material-symbols-outlined text-[20px]">bolt</span>
+<span class="font-stats-number text-stats-number">9,999</span>
+</div>
+<div class="font-label-md text-label-md text-primary bg-primary/10 px-xs py-[2px] rounded">Geração 1</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Panel: Auth Forms -->
+<div class="w-full md:w-1/2 p-lg md:p-xl flex flex-col relative overflow-y-auto custom-scrollbar">
+<!-- Mobile Header (Visible only on small screens) -->
+<div class="md:hidden flex flex-col items-center mb-lg">
+<h1 class="font-display-lg text-headline-lg-mobile text-primary tracking-tighter mb-base">MemeCard</h1>
+<p class="font-body-md text-body-md text-on-surface-variant text-center">Colecione. Troque. Domine.</p>
+</div>
+<!-- Tab Navigation -->
+<div class="flex gap-md border-b border-outline-variant/20 mb-lg relative">
+<button class="pb-sm font-label-md text-label-md text-primary border-b-2 border-primary transition-colors focus:outline-none w-1/2" id="tab-login" onclick="switchTab('login')">
+                    Entrar
+                </button>
+<button class="pb-sm font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors focus:outline-none w-1/2" id="tab-signup" onclick="switchTab('signup')">
+                    Cadastrar
+                </button>
+</div>
+<!-- Login Form -->
+<div class="flex flex-col gap-sm animate-fade-in flex-grow" id="form-login">
+<div class="flex flex-col gap-base">
+<label class="font-label-md text-label-md text-on-surface-variant" for="login-email">Email</label>
+<input class="bg-surface-dim border border-outline-variant/30 rounded-lg px-sm py-sm text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all placeholder-on-surface-variant/50" id="login-email" placeholder="seu@email.com" type="email"/>
+</div>
+<div class="flex flex-col gap-base mt-sm">
+<div class="flex justify-between items-center">
+<label class="font-label-md text-label-md text-on-surface-variant" for="login-password">Senha</label>
+<a class="font-label-md text-label-md text-primary hover:text-primary-fixed-dim transition-colors" href="#">Esqueci minha senha</a>
+</div>
+<div class="relative">
+<input class="w-full bg-surface-dim border border-outline-variant/30 rounded-lg px-sm py-sm text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all placeholder-on-surface-variant/50" id="login-password" placeholder="••••••••" type="password"/>
+<button class="absolute right-sm top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-on-surface transition-colors focus:outline-none">
+<span class="material-symbols-outlined text-[20px]">visibility_off</span>
+</button>
+</div>
+</div>
+<button class="w-full bg-primary-container text-white font-label-md text-label-md py-sm rounded-lg hover:bg-inverse-primary transition-colors mt-md active:scale-[0.98]">
+                    Entrar
+                </button>
+</div>
+<!-- Signup Form (Initially Hidden) -->
+<div class="hidden flex-col gap-sm animate-fade-in flex-grow" id="form-signup">
+<div class="flex flex-col gap-base">
+<label class="font-label-md text-label-md text-on-surface-variant" for="signup-name">Nome de Usuário</label>
+<input class="bg-surface-dim border border-outline-variant/30 rounded-lg px-sm py-sm text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all placeholder-on-surface-variant/50" id="signup-name" placeholder="DegenTrader99" type="text"/>
+</div>
+<div class="flex flex-col gap-base mt-xs">
+<label class="font-label-md text-label-md text-on-surface-variant" for="signup-email">Email</label>
+<input class="bg-surface-dim border border-outline-variant/30 rounded-lg px-sm py-sm text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all placeholder-on-surface-variant/50" id="signup-email" placeholder="seu@email.com" type="email"/>
+</div>
+<div class="flex flex-col gap-base mt-xs">
+<label class="font-label-md text-label-md text-on-surface-variant" for="signup-password">Senha</label>
+<input class="bg-surface-dim border border-outline-variant/30 rounded-lg px-sm py-sm text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all placeholder-on-surface-variant/50" id="signup-password" placeholder="••••••••" type="password"/>
+</div>
+<div class="flex flex-col gap-base mt-xs">
+<label class="font-label-md text-label-md text-on-surface-variant" for="signup-confirm-password">Confirmar Senha</label>
+<input class="bg-surface-dim border border-outline-variant/30 rounded-lg px-sm py-sm text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all placeholder-on-surface-variant/50" id="signup-confirm-password" placeholder="••••••••" type="password"/>
+</div>
+<button class="w-full bg-primary-container text-white font-label-md text-label-md py-sm rounded-lg hover:bg-inverse-primary transition-colors mt-md active:scale-[0.98]">
+                    Criar Conta
+                </button>
+</div>
+<!-- Social Login Divider -->
+<div class="mt-lg flex items-center gap-sm">
+<div class="h-px bg-outline-variant/30 flex-grow"></div>
+<span class="font-label-md text-label-md text-on-surface-variant">Ou continue com</span>
+<div class="h-px bg-outline-variant/30 flex-grow"></div>
+</div>
+<!-- Social Login Button -->
+<button class="w-full mt-sm border border-outline-variant/50 bg-surface text-on-surface font-label-md text-label-md py-sm rounded-lg hover:bg-surface-container-highest transition-colors flex items-center justify-center gap-sm active:scale-[0.98]">
+<!-- Simple inline SVG for Google G for a premium feel without bulky image -->
+<svg class="w-5 h-5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
+</svg>
+                Google
+            </button>
+<p class="mt-md text-center font-body-md text-on-surface-variant text-xs">
+                Ao continuar, você concorda com nossos <a class="text-primary hover:underline" href="#">Termos de Serviço</a> e <a class="text-primary hover:underline" href="#">Política de Privacidade</a>.
+            </p>
+</div>
+</div>
+<style>
+        .animate-fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Custom Scrollbar for Right Panel */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #363342;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #4a4455;
+        }
+    </style>
+<script>
+        function switchTab(tabId) {
+            const loginForm = document.getElementById('form-login');
+            const signupForm = document.getElementById('form-signup');
+            const loginTab = document.getElementById('tab-login');
+            const signupTab = document.getElementById('tab-signup');
+
+            if (tabId === 'login') {
+                loginForm.classList.remove('hidden');
+                loginForm.classList.add('flex');
+                signupForm.classList.add('hidden');
+                signupForm.classList.remove('flex');
+
+                loginTab.classList.add('text-primary', 'border-b-2', 'border-primary');
+                loginTab.classList.remove('text-on-surface-variant');
+                
+                signupTab.classList.remove('text-primary', 'border-b-2', 'border-primary');
+                signupTab.classList.add('text-on-surface-variant');
+            } else {
+                signupForm.classList.remove('hidden');
+                signupForm.classList.add('flex');
+                loginForm.classList.add('hidden');
+                loginForm.classList.remove('flex');
+
+                signupTab.classList.add('text-primary', 'border-b-2', 'border-primary');
+                signupTab.classList.remove('text-on-surface-variant');
+                
+                loginTab.classList.remove('text-primary', 'border-b-2', 'border-primary');
+                loginTab.classList.add('text-on-surface-variant');
+            }
+        }
+    </script>
+</body></html>

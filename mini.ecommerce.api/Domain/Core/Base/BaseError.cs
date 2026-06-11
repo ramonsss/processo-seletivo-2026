@@ -1,7 +1,7 @@
-﻿using apiMcardPrePagoGestorRelatorio.Domain.Core.Enums;
-using System.Text.Json;
+﻿using System.Text.Json;
+using mini.ecommerce.api.Domain.Core.Enums;
 
-namespace apiMcardPrePagoGestorRelatorio.Domain.Core.Base
+namespace mini.ecommerce.api.Domain.Core.Base
 {
     public record BaseError
     {
@@ -10,12 +10,16 @@ namespace apiMcardPrePagoGestorRelatorio.Domain.Core.Base
         public string? msgErro { get; init; }
         public string? origemErro { get; init; }
 
+        public BaseError()
+        {
+        }
+        
         public BaseError(EnumStatus tipoErro, int? codErro, string? msgErro)
         {
             this.tipoErro = tipoErro;
             this.codErro = codErro;
             this.msgErro = msgErro;
-            this.origemErro = "apiMardPrePagoPortadorCartao";
+            this.origemErro = "mini.ecommerce.api";
         }
 
         public BaseError(EnumStatus tipoErro, int? codErro, string? msgErro, string? origemErro)

@@ -1,5 +1,5 @@
-﻿using apiMcardPrePagoGestorRelatorio.Domain.Core.Base;
-using apiMcardPrePagoGestorRelatorio.Domain.Core.Enums;
+﻿using mini.ecommerce.api.Domain.Core.Base;
+using mini.ecommerce.api.Domain.Core.Enums;
 
 namespace mini.ecommerce.api.Adapter.Inboud.AdapterHttp.Mapper
 {
