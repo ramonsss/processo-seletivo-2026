@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MemeCard - Carrinho</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#e5e0f3",
+                        "surface-variant": "#363342",
+                        "surface-container-high": "#2b2836",
+                        "surface-container": "#201e2c",
+                        "surface-bright": "#3a3746",
+                        "on-surface-variant": "#ccc3d8",
+                        "on-primary": "#3f008e",
+                        "on-error-container": "#ffdad6",
+                        "on-error": "#690005",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "surface-container-lowest": "#0e0c19",
+                        "inverse-primary": "#732ee4",
+                        "tertiary-fixed": "#f0dbff",
+                        "primary": "#d2bbff",
+                        "on-primary-container": "#ede0ff",
+                        "surface": "#14121f",
+                        "on-tertiary-container": "#f2dfff",
+                        "primary-fixed-dim": "#d2bbff",
+                        "on-tertiary-fixed-variant": "#6900b3",
+                        "surface-tint": "#d2bbff",
+                        "on-surface": "#e5e0f3",
+                        "surface-container-low": "#1c1a27",
+                        "on-tertiary-fixed": "#2c0051",
+                        "error-container": "#93000a",
+                        "surface-dim": "#14121f",
+                        "surface-container-highest": "#363342",
+                        "secondary-fixed-dim": "#f9bd22",
+                        "secondary-fixed": "#ffdf9f",
+                        "tertiary-container": "#8d36db",
+                        "on-tertiary": "#490080",
+                        "on-primary-fixed": "#25005a",
+                        "inverse-on-surface": "#312f3d",
+                        "primary-fixed": "#eaddff",
+                        "on-secondary": "#402d00",
+                        "secondary-container": "#e3aa00",
+                        "secondary": "#ffc640",
+                        "outline-variant": "#4a4455",
+                        "tertiary-fixed-dim": "#ddb7ff",
+                        "primary-container": "#7c3aed",
+                        "on-secondary-container": "#5a4100",
+                        "on-secondary-fixed": "#261a00",
+                        "outline": "#958da1",
+                        "error": "#ffb4ab",
+                        "tertiary": "#ddb7ff",
+                        "on-background": "#e5e0f3",
+                        "on-primary-fixed-variant": "#5a00c6",
+                        "background": "#14121f"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xl": "4rem",
+                        "base": "4px",
+                        "md": "1.5rem",
+                        "margin-desktop": "64px",
+                        "gutter": "24px",
+                        "sm": "1rem",
+                        "lg": "2rem",
+                        "xs": "0.5rem",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "headline-md": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "display-lg": ["Montserrat"],
+                        "stats-number": ["Montserrat"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg-mobile": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "stats-number": ["20px", { "lineHeight": "24px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #0F0D1A; /* Fallback before JS runs, overridden by tailwind bg-background */
+        }
+        .glass-panel {
+            background: rgba(26, 22, 46, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glow-sr {
+            box-shadow: 0 0 15px rgba(234, 88, 12, 0.3);
+        }
+        .glow-c {
+            box-shadow: 0 0 10px rgba(156, 163, 175, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen font-body-md pt-20">
+<!-- TopNavBar (Predicted Content mapped to style keys) -->
+<nav class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-outline-variant/10">
+<div class="flex justify-between items-center px-md py-xs max-w-[1440px] mx-auto w-full">
+<div class="font-display-lg text-display-lg font-extrabold text-primary tracking-tighter">
+                MEME TCG
+            </div>
+<div class="hidden md:flex gap-sm">
+<a class="text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-variant/20 rounded-xl px-4 py-2 font-body-md text-body-md transition-all duration-200 active:scale-95" href="#">Marketplace</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-variant/20 rounded-xl px-4 py-2 font-body-md text-body-md transition-all duration-200 active:scale-95" href="#">Boosters</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-variant/20 rounded-xl px-4 py-2 font-body-md text-body-md transition-all duration-200 active:scale-95" href="#">Collection</a>
+</div>
+<div class="flex gap-4 items-center">
+<button class="text-primary transition-colors hover:bg-surface-variant/20 rounded-xl p-2 transition-all duration-200 active:scale-95">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-variant/20 rounded-xl p-2 transition-all duration-200 active:scale-95">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop py-lg">
+<header class="mb-lg">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface mb-2">Carrinho</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">2 itens selecionados</p>
+</header>
+<div class="flex flex-col lg:flex-row gap-gutter">
+<!-- Cart Items List (75%) -->
+<div class="w-full lg:w-3/4 flex flex-col gap-sm">
+<!-- Item 1 -->
+<div class="glass-panel rounded-xl p-sm flex flex-col md:flex-row items-center gap-md">
+<!-- Thumbnail -->
+<div class="w-24 h-36 flex-shrink-0 rounded-lg overflow-hidden relative glow-sr border border-orange-500/30">
+<img alt="Card Image" class="w-full h-full object-cover" data-alt="A stylized digital trading card illustration of a light brown stray dog standing proudly on a street corner. The artwork is vibrant, blending chaotic internet meme culture with a premium, sleek design style. The lighting highlights the dog against an urban, slightly gritty background, evoking an exclusive digital collectible feel within a dark mode UI environment. High resolution, saturated colors, digital art aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBILMXA6GXR4Gdd_j-2g4n9b83Iq52Sb48B_dnHqnAsmJM8hJWs04vkBm99x4arbUbeYnjR0BAiifheGgn7xfy0iWP-auXMZRhsfZ5T1rINH9fqpZ1nEpaHdqLcmCOGB5cWTg55BCjSPb1T-4yI2421pbg9-o1-1NbF9ZfOlYPPhyuTC92vWWxaNFgTdBriULEst8ZMjP1LST4jKB5m5CpaPZ0F8q1mZR5_GFZrDjnN2DLCbirmqT5Ze0_R0zeLZSxdT2CMLeODiis"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+</div>
+<!-- Details -->
+<div class="flex-grow flex flex-col justify-center">
+<div class="flex items-center gap-2 mb-1">
+<span class="bg-orange-500/20 text-orange-400 border border-orange-500 px-2 py-0.5 rounded-full font-label-md text-label-md text-[10px]">SR</span>
+<span class="text-on-surface-variant font-label-md text-label-md text-xs">#SR-001</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Vira-lata Caramelo</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">R$ 29,90 / un</p>
+</div>
+<!-- Controls & Price -->
+<div class="flex items-center gap-md mt-4 md:mt-0">
+<div class="flex items-center border border-outline-variant/30 rounded-lg bg-surface-container-lowest">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<input class="w-12 text-center bg-transparent border-none text-on-surface font-body-md text-body-md focus:ring-0 p-0 appearance-none m-0" min="1" type="number" value="1"/>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+<div class="text-right min-w-[80px]">
+<p class="font-stats-number text-stats-number text-primary">R$ 29,90</p>
+</div>
+<button class="p-2 text-on-surface-variant hover:text-error transition-colors rounded-lg hover:bg-error/10">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="glass-panel rounded-xl p-sm flex flex-col md:flex-row items-center gap-md">
+<!-- Thumbnail -->
+<div class="w-24 h-36 flex-shrink-0 rounded-lg overflow-hidden relative glow-c border border-gray-500/30">
+<img alt="Card Image" class="w-full h-full object-cover grayscale-[30%]" data-alt="A stylized digital trading card illustration featuring a group of intense, culturally expressive individuals seated together. The artwork blends chaotic internet meme energy with a sophisticated, premium digital collectible look. Dark, muted tones with subtle lighting highlights create a moody, gallery-like atmosphere suitable for a dark mode interface. High detail, digital painting style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5CoB9jKf3GUuWm8J00qHlPrzeY8KOnge6W5k3HDN45N6KKxS-gokZSPy69ASwTYyD3ETk7UosVYkQrnIrrGPJgHYEpWGl9nNV-bwaW8Fm8GxNG0uSNbPdQWqguwQ7TPsZ8tvkEePJwgp3aWc-VMEzf_wC3RJbJehxwj8fjmvo-6FBPtlDmrZjTtttkuZdlsSGfvScHctW8Wg-x974d83vJiQ2eGe-fd5wr3_BLKtgGawp2Qa8pCW32uKUX60p2kcuSWKfOO-zJfk"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+</div>
+<!-- Details -->
+<div class="flex-grow flex flex-col justify-center">
+<div class="flex items-center gap-2 mb-1">
+<span class="bg-gray-500/20 text-gray-400 border border-gray-500 px-2 py-0.5 rounded-full font-label-md text-label-md text-[10px]">C</span>
+<span class="text-on-surface-variant font-label-md text-label-md text-xs">#C-042</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Choque de Cultura</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">R$ 29,90 / un</p>
+</div>
+<!-- Controls & Price -->
+<div class="flex items-center gap-md mt-4 md:mt-0">
+<div class="flex items-center border border-outline-variant/30 rounded-lg bg-surface-container-lowest">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<input class="w-12 text-center bg-transparent border-none text-on-surface font-body-md text-body-md focus:ring-0 p-0 appearance-none m-0" min="1" type="number" value="1"/>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+<div class="text-right min-w-[80px]">
+<p class="font-stats-number text-stats-number text-primary">R$ 29,90</p>
+</div>
+<button class="p-2 text-on-surface-variant hover:text-error transition-colors rounded-lg hover:bg-error/10">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Order Summary Sidebar (25%) -->
+<div class="w-full lg:w-1/4">
+<div class="glass-panel rounded-xl p-md sticky top-32 flex flex-col gap-sm">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-2">Resumo</h2>
+<div class="flex justify-between items-center py-2 border-b border-outline-variant/20">
+<span class="font-body-md text-body-md text-on-surface-variant">Subtotal</span>
+<span class="font-body-md text-body-md text-on-surface">R$ 59,80</span>
+</div>
+<div class="py-2">
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2">Cupom de Desconto</label>
+<div class="flex gap-2">
+<input class="flex-grow bg-surface-container-lowest border border-outline-variant/30 rounded-lg px-3 py-2 text-on-surface font-body-md text-body-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" placeholder="Digite aqui" type="text"/>
+<button class="bg-surface-variant hover:bg-surface-bright text-on-surface font-label-md text-label-md px-4 py-2 rounded-lg transition-colors border border-outline-variant/30">
+                                Aplicar
+                            </button>
+</div>
+</div>
+<div class="flex justify-between items-center py-4 mt-2">
+<span class="font-body-lg text-body-lg font-bold text-on-surface">Total</span>
+<span class="font-stats-number text-stats-number text-primary">R$ 59,80</span>
+</div>
+<button class="w-full bg-primary-container text-white font-label-md text-label-md font-bold py-3 rounded-xl hover:opacity-90 transition-opacity mt-4 flex items-center justify-center gap-2">
+                        Finalizar Compra
+                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+<div class="text-center mt-4">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors underline decoration-transparent hover:decoration-primary underline-offset-4" href="#">
+                            Continuar Comprando
+                        </a>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

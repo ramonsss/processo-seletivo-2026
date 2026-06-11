@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MemeCard - Grávida de Taubaté</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#ddb7ff",
+                        "on-surface": "#e5e0f3",
+                        "surface": "#14121f",
+                        "primary": "#d2bbff",
+                        "on-primary": "#3f008e",
+                        "surface-dim": "#14121f",
+                        "on-secondary-fixed": "#261a00",
+                        "inverse-on-surface": "#312f3d",
+                        "inverse-surface": "#e5e0f3",
+                        "surface-container-lowest": "#0e0c19",
+                        "surface-container": "#201e2c",
+                        "error": "#ffb4ab",
+                        "surface-variant": "#363342",
+                        "tertiary-fixed": "#f0dbff",
+                        "secondary-container": "#e3aa00",
+                        "surface-container-low": "#1c1a27",
+                        "surface-container-highest": "#363342",
+                        "on-primary-fixed-variant": "#5a00c6",
+                        "on-surface-variant": "#ccc3d8",
+                        "inverse-primary": "#732ee4",
+                        "on-tertiary-fixed-variant": "#6900b3",
+                        "outline-variant": "#4a4455",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "primary-fixed-dim": "#d2bbff",
+                        "error-container": "#93000a",
+                        "surface-container-high": "#2b2836",
+                        "on-tertiary-fixed": "#2c0051",
+                        "on-secondary-container": "#5a4100",
+                        "surface-tint": "#d2bbff",
+                        "surface-bright": "#3a3746",
+                        "secondary-fixed-dim": "#f9bd22",
+                        "primary-container": "#7c3aed",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary": "#490080",
+                        "tertiary-container": "#8d36db",
+                        "outline": "#958da1",
+                        "on-secondary": "#402d00",
+                        "on-primary-container": "#ede0ff",
+                        "on-error": "#690005",
+                        "background": "#14121f",
+                        "primary-fixed": "#eaddff",
+                        "on-tertiary-container": "#f2dfff",
+                        "on-background": "#e5e0f3",
+                        "secondary-fixed": "#ffdf9f",
+                        "secondary": "#ffc640",
+                        "on-primary-fixed": "#25005a",
+                        "tertiary-fixed-dim": "#ddb7ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xs": "0.5rem",
+                        "margin-mobile": "16px",
+                        "md": "1.5rem",
+                        "margin-desktop": "64px",
+                        "xl": "4rem",
+                        "lg": "2rem",
+                        "gutter": "24px",
+                        "sm": "1rem",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Montserrat"],
+                        "label-md": ["Inter"],
+                        "headline-lg": ["Montserrat"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display-lg": ["Montserrat"],
+                        "stats-number": ["Montserrat"],
+                        "headline-lg-mobile": ["Montserrat"],
+                        "mono": ["Space Mono", "monospace"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "stats-number": ["20px", { "lineHeight": "24px", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }]
+                    },
+                    "animation": {
+                        "float": "float 6s ease-in-out infinite",
+                        "shimmer": "shimmer 2s linear infinite",
+                        "pulse-slow": "pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite"
+                    },
+                    "keyframes": {
+                        "float": {
+                            "0%, 100%": { transform: "translateY(0)" },
+                            "50%": { transform: "translateY(-10px)" }
+                        },
+                        "shimmer": {
+                            "from": { backgroundPosition: "200% center" },
+                            "to": { backgroundPosition: "-200% center" }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #0F0D1A;
+        }
+        .ssr-glow {
+            box-shadow: 0 0 30px rgba(251, 191, 36, 0.3), 0 0 15px rgba(124, 58, 237, 0.4);
+        }
+        .bg-shimmer-gold {
+            background: linear-gradient(90deg, #b48608, #fbf5b7, #a67c00, #fbf5b7, #b48608);
+            background-size: 200% auto;
+        }
+    </style>
+</head>
+<body class="text-on-surface bg-background min-h-screen flex flex-col pt-16">
+<!-- TopNavBar Component -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-outline-variant/20 shadow-sm transition-all duration-300 ease-in-out">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 w-full max-w-[1440px] mx-auto">
+<div class="flex items-center gap-md">
+<a class="font-headline-md text-headline-md font-extrabold text-primary tracking-tighter" href="#">MemeCard</a>
+</div>
+<nav class="hidden md:flex items-center gap-lg font-label-md text-label-md">
+<a class="text-primary font-bold border-b-2 border-primary pb-1" href="#">Marketplace</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors hover:bg-surface-variant/50 px-3 py-2 rounded-md" href="#">Boosters</a>
+</nav>
+<div class="flex items-center gap-sm">
+<button class="hidden md:flex items-center justify-center w-10 h-10 rounded-full bg-surface-container hover:bg-surface-variant/50 transition-colors text-primary dark:text-primary-fixed-dim">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">search</span>
+</button>
+<button class="font-label-md text-label-md text-on-primary bg-primary-container hover:bg-primary-container/90 px-4 py-2 rounded-lg transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="hidden sm:inline">Account</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop py-lg md:py-xl flex flex-col gap-xl">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-2 text-on-surface-variant font-label-md text-label-md">
+<a class="hover:text-primary transition-colors" href="#">Marketplace</a>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="text-on-surface">Grávida de Taubaté</span>
+</nav>
+<!-- Product Detail Layout -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-xl md:gap-[80px] items-start">
+<!-- Left Column: Card Image -->
+<div class="flex flex-col items-center gap-lg">
+<div class="relative w-full max-w-[400px] aspect-[2/3] rounded-xl overflow-hidden ssr-glow border-2 border-secondary-container/50 animate-float group cursor-crosshair">
+<!-- High Quality Image -->
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent z-10"></div>
+<img alt="Meme Card Artwork" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A highly detailed digital illustration of a fictional trading card featuring a humorous 'pregnant' figure exaggerated for comedic effect, styled like a premium digital collectible. The scene is illuminated by glowing neon purples and golds, creating a 'Neon Noir' aesthetic. The card is set against a deep, dark minimalist background, emphasizing the luxurious and exclusive nature of the digital asset." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwhSBJ31Gsi1fYElIERdesNhACQ2mtMLXBSNvERnC26YoFQdZmDBvX9pSglfZFXyLJG1GY5n-rszZ-XXDG7UySIU6bFcqSubgizA71xGWM5CUnlsUNRnWGVPfqLmHx0w8lBHKNI9lahsFZiI02oJbw7cN9oLabhg7FAQxkSMnjd7Nf8Wt0yAKBNLb7IDTTLOBN98eVOuK483IZNlpkkTYStCjWJrthI-1iiS1FWW2feA-fnFD0GkZK48ohRMaaPD2xZAh1Gw73ULw"/>
+<!-- Rarity Tag Inside Card -->
+<div class="absolute top-4 right-4 z-20">
+<span class="bg-shimmer-gold animate-shimmer text-on-secondary-fixed font-label-md text-label-md px-3 py-1 rounded-full font-bold shadow-[0_0_10px_rgba(251,191,36,0.5)]">SSR</span>
+</div>
+</div>
+<!-- Prominent Rarity Badge Below -->
+<div class="inline-flex items-center gap-2 bg-secondary-container/10 border border-secondary-container/30 px-6 py-3 rounded-full text-secondary-fixed-dim font-headline-md text-[18px] font-bold shadow-[0_0_15px_rgba(251,191,36,0.15)]">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">stars</span>
+                    SSR — Lendária
+                </div>
+</div>
+<!-- Right Column: Details -->
+<div class="flex flex-col gap-lg">
+<div class="flex flex-col gap-sm">
+<h1 class="font-display-lg text-display-lg text-on-surface">Grávida de Taubaté</h1>
+<div class="flex flex-wrap items-center gap-4">
+<span class="font-mono text-on-surface-variant bg-surface-container-high px-3 py-1 rounded-md text-sm border border-outline-variant/30 tracking-wider">SSR-0001-000045</span>
+<span class="text-secondary-fixed-dim font-label-md text-label-md flex items-center gap-1 bg-secondary-container/10 px-2 py-1 rounded">
+<span class="material-symbols-outlined text-[16px]">inventory_2</span>
+                            Lote 01 — Edição de Lançamento
+                        </span>
+</div>
+</div>
+<div class="bg-surface-container p-md rounded-xl border border-outline-variant/20">
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                        "Uma lenda urbana que parou o Brasil. O auge da criatividade e da audácia em forma de card colecionável."
+                    </p>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-end">
+<span class="font-display-lg text-[40px] font-bold text-primary-fixed-dim">R$ 49,90</span>
+</div>
+<p class="font-label-md text-label-md text-error flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">local_fire_department</span>
+                        Restam 47 de 1.000 unidades
+                    </p>
+<!-- Progress bar -->
+<div class="w-full h-1 bg-surface-container-highest rounded-full overflow-hidden mt-1">
+<div class="h-full bg-error w-[4.7%] shadow-[0_0_5px_rgba(255,180,171,0.5)]"></div>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row gap-4 mt-4">
+<button class="flex-1 bg-primary-container hover:bg-primary-container/80 text-on-primary font-headline-md text-[18px] py-4 rounded-xl transition-colors shadow-[0_0_15px_rgba(124,58,237,0.3)] flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">shopping_cart</span>
+                        Adicionar ao Carrinho
+                    </button>
+<button class="sm:w-16 h-16 sm:h-auto border border-outline-variant text-on-surface hover:text-error hover:border-error hover:bg-error/10 rounded-xl transition-colors flex items-center justify-center group">
+<span class="material-symbols-outlined text-[28px] group-hover:scale-110 transition-transform">favorite</span>
+<span class="sm:hidden ml-2 font-label-md text-label-md">Favoritar</span>
+</button>
+</div>
+<!-- Authenticity Section -->
+<div class="mt-md pt-md border-t border-outline-variant/20 flex flex-col gap-3">
+<div class="flex items-center gap-3 text-on-surface-variant font-body-md text-body-md">
+<span class="material-symbols-outlined text-primary">verified</span>
+<span>Autenticado via Blockchain Brasileira (MemeChain)</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant font-body-md text-body-md">
+<span class="material-symbols-outlined text-primary">history</span>
+<span>Histórico de transferências disponível</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Related Items Section -->
+<section class="mt-xl pt-xl border-t border-outline-variant/10">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-lg flex items-center gap-2">
+                Você também pode gostar
+                <span class="material-symbols-outlined text-primary">trending_up</span>
+</h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-gutter">
+<!-- Related Card 1 -->
+<div class="bg-surface-container rounded-xl overflow-hidden border border-outline-variant/20 hover:border-primary/50 hover:shadow-[0_0_15px_rgba(124,58,237,0.2)] transition-all cursor-pointer group flex flex-col">
+<div class="relative w-full aspect-[2/3] overflow-hidden bg-surface-container-lowest">
+<img alt="Vira-lata Caramelo Card" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A stylized trading card illustration featuring an iconic Brazilian 'Caramelo' street dog. The artwork is vibrant, framed by sleek digital UI borders with a deep black and subtle purple background, maintaining a premium collectible look within a dark mode interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmVClm6b4PZ6UhzQmcVl2zlz1FoeFbd487uZMqwGoPoMQBoXAJMSVR5lH74iYCjmO9QJ3F_WjlB8s63YjWx_JL-BRg4cr998btM-1C4fF7fDdzzWyZztk003_xmOsmm6qelMI4REn-qI9BNmXzPbZC9m_YvDyz3PGJ6QEZGYxsKmwsvtP6Y6VPUn2ku3gKEli6XCS0-Ud7w9qNKVkpMS7xOmFkF4-OikkuaKBQyc_7tPdWMTj_PFKGIzi09Sx7cNZSMHUt13KafRM"/>
+<div class="absolute top-2 right-2 bg-primary/20 border border-primary/50 text-primary-fixed-dim px-2 py-0.5 rounded text-xs font-bold backdrop-blur-sm">SR</div>
+</div>
+<div class="p-3 md:p-4 flex flex-col gap-1">
+<h3 class="font-label-md text-label-md text-on-surface truncate">Vira-lata Caramelo</h3>
+<span class="font-stats-number text-stats-number text-primary-fixed-dim mt-1">R$ 29,90</span>
+</div>
+</div>
+<!-- Related Card 2 -->
+<div class="bg-surface-container rounded-xl overflow-hidden border border-outline-variant/20 hover:border-primary/50 hover:shadow-[0_0_15px_rgba(124,58,237,0.2)] transition-all cursor-pointer group flex flex-col">
+<div class="relative w-full aspect-[2/3] overflow-hidden bg-surface-container-lowest">
+<img alt="Bambam Irineu Card" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A conceptual trading card design of a humorous meme persona, rendered in a high-contrast, moody style suitable for a modern gaming dashboard. Deep blacks, glowing purple accents, and crisp typography frame the dynamic character portrait." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEK5jrY7RRp2a6jvOm33PGBg7rOF70kBcQ9wHvHatXEMc9R35Z05RS1jKXqmF1M1_BbKTruZJseBv2Tg400RdfejKbtYVHsICvzRkAep1nfT3cukzJ9RaIilpGXjXLRe6N9pwYaSjDnSkSMDYUw_wZ2BchRilfgeAU1LeFfWoYc592FYTkKfoijGjXHNcvubgz_0t38a3jCJUkYDC1WBQ9zlqlbJaH_UtX7h0277K439CJMue22va5muhnFifKsCHLwbniV8Tcv0w"/>
+<div class="absolute top-2 right-2 bg-surface-variant text-on-surface-variant px-2 py-0.5 rounded text-xs font-bold backdrop-blur-sm">C</div>
+</div>
+<div class="p-3 md:p-4 flex flex-col gap-1">
+<h3 class="font-label-md text-label-md text-on-surface truncate">Bambam Irineu</h3>
+<span class="font-stats-number text-stats-number text-primary-fixed-dim mt-1">R$ 9,90</span>
+</div>
+</div>
+<!-- Related Card 3 -->
+<div class="bg-surface-container rounded-xl overflow-hidden border border-outline-variant/20 hover:border-primary/50 hover:shadow-[0_0_15px_rgba(124,58,237,0.2)] transition-all cursor-pointer group flex flex-col">
+<div class="relative w-full aspect-[2/3] overflow-hidden bg-surface-container-lowest">
+<img alt="Luíza no Canadá Card" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A digital collectible trading card featuring a humorous winter-themed meme concept. The imagery is sharp and colorful, encased in a dark UI frame with subtle glassmorphic effects and neon accents, exuding a premium fintech aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbUu7tTQ_OsZI1A2Ze05n89wGbP5idUG24kXPl1yRGBckEP1aar0_PSq3xQXq8JbDl2BwyRQfBWsb4tfNc4iJADLFOa_FvXVcsDW-Bo9GP5DPkOR3uA6uyZVwMNLLb2jL60SyfwsxGeGKnHlM5eTUN2fPyMVY4i0ZgiuN-owxLHleLvBMk0N6BYrTnqVD1TCWud9HWI8wXBu1cooLpiyRS-l8v0mVy5UxKsane7qcr6PO3ZP0SrSjQ4QIcYohDRfZ5LvOdBfIFCUE"/>
+<div class="absolute top-2 right-2 bg-primary/20 border border-primary/50 text-primary-fixed-dim px-2 py-0.5 rounded text-xs font-bold backdrop-blur-sm">SR</div>
+</div>
+<div class="p-3 md:p-4 flex flex-col gap-1">
+<h3 class="font-label-md text-label-md text-on-surface truncate">Luíza no Canadá</h3>
+<span class="font-stats-number text-stats-number text-primary-fixed-dim mt-1">R$ 24,90</span>
+</div>
+</div>
+<!-- Related Card 4 -->
+<div class="bg-surface-container rounded-xl overflow-hidden border border-outline-variant/20 hover:border-primary/50 hover:shadow-[0_0_15px_rgba(124,58,237,0.2)] transition-all cursor-pointer group flex flex-col">
+<div class="relative w-full aspect-[2/3] overflow-hidden bg-surface-container-lowest">
+<img alt="Choque de Cultura Card" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A sleek digital trading card design depicting an internet culture meme, set against a dark, minimalist background. The card features sharp edges, a top-down lighting gradient, and subtle high-tech glowing accents typical of a modern digital asset gallery." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBm4r_oYRE7H1nwQz9BEoVEj2tRXHbkZ7sg29vb8zqc7iAKFQydcJ1qzgfA3bIX1Xo7xtBM8X41xC6f5N-IerU4-Qgt4C4KtWHp_HLevgoSC7t2wrA_8QOHt01-Z3aA5Dph9j82uCNvTZA08dRT3MBRwwNmZ9zpL4L7sZvifOYMVw6hXo9zFkG_Es4dX3RzoE5niWF2ZE4iecZfjDXScDFwLOoeYqcoWgqhwevBrPr8C1xRnputTdTkZ4YJMK8jIb6qQb4ncxaxnus"/>
+<div class="absolute top-2 right-2 bg-surface-variant text-on-surface-variant px-2 py-0.5 rounded text-xs font-bold backdrop-blur-sm">C</div>
+</div>
+<div class="p-3 md:p-4 flex flex-col gap-1">
+<h3 class="font-label-md text-label-md text-on-surface truncate">Choque de Cultura</h3>
+<span class="font-stats-number text-stats-number text-primary-fixed-dim mt-1">R$ 14,90</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Component -->
+<footer class="bg-surface-container-lowest dark:bg-surface-container-lowest w-full py-xl border-t border-outline-variant/10 mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop gap-md w-full max-w-[1440px] mx-auto">
+<div class="flex flex-col items-center md:items-start gap-2">
+<span class="font-headline-md text-headline-md text-primary">MemeCard</span>
+<p class="text-on-surface-variant font-body-md text-body-md opacity-80">© 2024 MemeCard - The Brazilian Meme TCG.</p>
+</div>
+<nav class="flex flex-wrap justify-center gap-md font-body-md text-body-md">
+<a class="text-on-surface-variant hover:text-primary transition-colors opacity-80 hover:opacity-100" href="#">Termos</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors opacity-80 hover:opacity-100" href="#">Privacidade</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors opacity-80 hover:opacity-100" href="#">Suporte</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors opacity-80 hover:opacity-100" href="#">Discord</a>
+</nav>
+</div>
+</footer>
+</body></html>

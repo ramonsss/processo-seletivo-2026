@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MemeCard - Checkout</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#14121f",
+                        "primary-fixed": "#eaddff",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "on-primary-fixed": "#25005a",
+                        "on-error-container": "#ffdad6",
+                        "secondary-fixed": "#ffdf9f",
+                        "secondary": "#ffc640",
+                        "on-tertiary-container": "#f2dfff",
+                        "surface-tint": "#d2bbff",
+                        "on-tertiary-fixed-variant": "#6900b3",
+                        "on-surface-variant": "#ccc3d8",
+                        "on-surface": "#e5e0f3",
+                        "outline-variant": "#4a4455",
+                        "on-primary-container": "#ede0ff",
+                        "surface-container-highest": "#363342",
+                        "secondary-fixed-dim": "#f9bd22",
+                        "primary-container": "#7c3aed",
+                        "background": "#14121f",
+                        "inverse-surface": "#e5e0f3",
+                        "surface": "#14121f",
+                        "surface-container-high": "#2b2836",
+                        "primary-fixed-dim": "#d2bbff",
+                        "inverse-primary": "#732ee4",
+                        "primary": "#d2bbff",
+                        "outline": "#958da1",
+                        "on-secondary": "#402d00",
+                        "on-tertiary-fixed": "#2c0051",
+                        "error": "#ffb4ab",
+                        "on-secondary-container": "#5a4100",
+                        "inverse-on-surface": "#312f3d",
+                        "surface-container": "#201e2c",
+                        "on-primary": "#3f008e",
+                        "tertiary": "#ddb7ff",
+                        "error-container": "#93000a",
+                        "on-background": "#e5e0f3",
+                        "tertiary-container": "#8d36db",
+                        "tertiary-fixed": "#f0dbff",
+                        "on-primary-fixed-variant": "#5a00c6",
+                        "on-error": "#690005",
+                        "secondary-container": "#e3aa00",
+                        "on-tertiary": "#490080",
+                        "surface-bright": "#3a3746",
+                        "surface-container-lowest": "#0e0c19",
+                        "surface-container-low": "#1c1a27",
+                        "tertiary-fixed-dim": "#ddb7ff",
+                        "surface-variant": "#363342",
+                        "on-secondary-fixed": "#261a00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xl": "4rem",
+                        "margin-mobile": "16px",
+                        "base": "4px",
+                        "xs": "0.5rem",
+                        "margin-desktop": "64px",
+                        "md": "1.5rem",
+                        "sm": "1rem",
+                        "lg": "2rem",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Montserrat"],
+                        "display-lg": ["Montserrat"],
+                        "stats-number": ["Montserrat"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg-mobile": ["Montserrat"],
+                        "headline-md": ["Montserrat"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "stats-number": ["20px", { "lineHeight": "24px", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #0F0D1A; }
+        .glow-ssr { box-shadow: 0 0 20px rgba(251, 191, 36, 0.3); }
+        .glow-input:focus { border-color: #7C3AED; box-shadow: 0 0 0 1px #7C3AED; }
+    </style>
+</head>
+<body class="text-on-background min-h-screen flex flex-col font-body-md selection:bg-primary-container selection:text-on-primary-container pb-xl">
+<!-- TopNavBar (Simplified for Checkout - Intent: Transactional) -->
+<nav class="bg-surface/80 backdrop-blur-md dark:bg-surface-container/80 border-b border-outline-variant/10 shadow-sm fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16">
+<a class="flex items-center gap-xs text-primary hover:text-primary-fixed transition-colors" href="#">
+<span class="material-symbols-outlined text-headline-md" style="font-variation-settings: 'FILL' 0;">arrow_back</span>
+<span class="font-label-md text-label-md hidden md:inline">Voltar</span>
+</a>
+<div class="font-display-lg text-headline-md-mobile text-primary tracking-tighter">MemeCard</div>
+<div class="w-[72px]"></div> <!-- Spacer for centering -->
+</nav>
+<!-- Main Checkout Container -->
+<main class="mt-24 px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto w-full flex-grow flex flex-col lg:flex-row gap-gutter">
+<!-- Left Column: Resumo do Pedido -->
+<div class="w-full lg:w-5/12 flex flex-col gap-md">
+<h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Resumo do Pedido</h1>
+<div class="bg-[#1A162E] border border-outline-variant/10 rounded-xl p-md flex flex-col gap-md">
+<!-- Order Item -->
+<div class="flex gap-md items-start">
+<div class="w-24 h-36 bg-surface-container rounded-lg overflow-hidden border border-outline-variant/20 relative flex-shrink-0 glow-ssr">
+<div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/80 z-10"></div>
+<img alt="Card Artwork" class="w-full h-full object-cover" data-alt="A stylized digital trading card artwork featuring a pregnant woman in a hyper-realistic, dramatic studio lighting setup. The color palette emphasizes deep purples and neon accents, maintaining a premium 'Neon Noir' aesthetic suitable for a high-end digital collector's item. The background features subtle holographic and metallic textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuApRy8ZxDeOLSadTW6urxZie8O4Coa2ewrAVuSM3OwXhi5QjQGQ6xs2Wm9PvYvfu9_BEyF-vYneoY-Ss-Tkz6LBMJ32RN1UJNegqHfgjvhNDTM7tirVyVWyAgBEf0guONAh9dEU6L8fnLONGN6-1hBb-K9jIEmmGrvQyLCbxVqS4tA-1kj7FIHffdCdH8xAenYZMZ4ExwZ4abUx-sj0iN71fNIvGACC_1_gieHiyvWnjzvzu5bv_VTuLxi4Qc1mvkSnCd0kjEiUmWg"/>
+<div class="absolute top-2 right-2 bg-gradient-to-r from-amber-400 to-yellow-600 text-black font-label-md text-[10px] px-2 py-0.5 rounded-full z-20 font-bold uppercase tracking-wider animate-pulse">SSR</div>
+</div>
+<div class="flex flex-col flex-grow gap-base">
+<h3 class="font-headline-md text-[20px] text-on-surface leading-tight">Grávida de Taubaté</h3>
+<p class="font-body-md text-label-md text-on-surface-variant uppercase">Série SSR-0001</p>
+<div class="flex justify-between items-center mt-auto pt-sm border-t border-outline-variant/10">
+<span class="font-body-md text-on-surface-variant">Qtd: 1</span>
+<span class="font-stats-number text-stats-number text-primary">R$ 49,90</span>
+</div>
+</div>
+</div>
+<!-- Totals -->
+<div class="flex flex-col gap-sm pt-md border-t border-outline-variant/10 mt-sm">
+<div class="flex justify-between font-body-md text-on-surface-variant">
+<span>Subtotal</span>
+<span>R$ 49,90</span>
+</div>
+<div class="flex justify-between font-body-md text-on-surface-variant">
+<span>Taxa de Minting</span>
+<span>Grátis</span>
+</div>
+<div class="flex justify-between font-headline-md text-headline-md text-on-surface mt-sm">
+<span>Total</span>
+<span class="text-primary">R$ 49,90</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Forma de Pagamento -->
+<div class="w-full lg:w-7/12 flex flex-col gap-md">
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Forma de Pagamento</h2>
+<div class="bg-[#1A162E] border border-outline-variant/10 rounded-xl flex flex-col overflow-hidden">
+<!-- Payment Tabs -->
+<div class="flex border-b border-outline-variant/10">
+<button class="flex-1 py-sm font-label-md text-label-md text-primary border-b-2 border-primary bg-primary-container/10 transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">qr_code</span> PIX
+                    </button>
+<button class="flex-1 py-sm font-label-md text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-variant/30 transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">credit_card</span> Cartão
+                    </button>
+<button class="flex-1 py-sm font-label-md text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-variant/30 transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">receipt_long</span> Boleto
+                    </button>
+</div>
+<!-- Tab Content (PIX) -->
+<div class="p-md md:p-lg flex flex-col items-center text-center gap-lg">
+<div class="flex flex-col items-center gap-xs">
+<p class="font-body-lg text-body-lg text-on-surface">Escaneie o QR Code ou copie o código abaixo para pagar.</p>
+<p class="font-body-md text-label-md text-error flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">timer</span>
+                            O código expira em <span class="font-stats-number ml-1" id="timer">14:59</span>
+</p>
+</div>
+<!-- QR Code Placeholder -->
+<div class="w-48 h-48 bg-white p-2 rounded-lg shadow-lg flex items-center justify-center relative">
+<img alt="QR Code" class="w-full h-full object-cover" data-alt="A high-contrast, black and white geometric matrix pattern resembling a complex QR code. The image is crisp and digital, perfectly square, designed to simulate a functioning payment code within a modern, minimalist fintech application interface. No background details." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBR2JdqoJ4P6SfqEgdgW2RuhcojARO6ViAO6ZvC8420RL4eOqMfSoQEft-KcS3e5Kx0PQLp1Ucua9uUEnxVegtAl79bKmz47Aa8xZ4jS8fBPOZD8YaFHlCKerMOAz2zGZjc4doP4hhxVUJVenjWx6sKPziitHozFzMtcwKsSVAOmH_Y33cDn_ubPIYKMum3FVnCsj5ahKhUaS8t2U6K3wKpnTW-C_RSKLlCvsOE1Jrv5qNZF55k83n2MPgQyTdzwHk-wLYttZAdoUU"/>
+<!-- Decorative corners for high-tech feel -->
+<div class="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-primary"></div>
+<div class="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-primary"></div>
+<div class="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-primary"></div>
+<div class="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-primary"></div>
+</div>
+<!-- Copy Code Field -->
+<div class="w-full max-w-md flex flex-col gap-2 text-left">
+<label class="font-label-md text-label-md text-on-surface-variant">Código PIX (Copia e Cola)</label>
+<div class="flex relative">
+<input class="w-full bg-[#0F0D1A] border border-outline-variant/30 rounded-lg py-3 pl-4 pr-12 text-on-surface font-body-md outline-none glow-input truncate" readonly="" type="text" value="00020126580014br.gov.bcb.pix0136123e4567-e89b-12d3-a456-426655440000520400005303986540549.905802BR5913MemeCard Inc6009Sao Paulo62070503***63041A2B"/>
+<button class="absolute right-2 top-1/2 -translate-y-1/2 text-primary hover:text-tertiary transition-colors p-1" title="Copiar código">
+<span class="material-symbols-outlined">content_copy</span>
+</button>
+</div>
+</div>
+<!-- Action Button -->
+<button class="w-full max-w-md bg-[#7C3AED] hover:bg-tertiary-container text-white font-label-md text-label-md py-4 rounded-lg transition-colors flex items-center justify-center gap-2">
+                        Já realizei o pagamento
+                        <span class="material-symbols-outlined text-[20px]">check_circle</span>
+</button>
+</div>
+</div>
+<!-- Security Badge -->
+<div class="flex items-center justify-center gap-xs mt-auto pt-md text-on-surface-variant opacity-70">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+<span class="font-label-md text-[12px] uppercase tracking-widest">Pagamento seguro e criptografado</span>
+</div>
+</div>
+</main>
+<script>
+        // Simple timer logic for demonstration
+        let timeLeft = 14 * 60 + 59;
+        const timerElement = document.getElementById('timer');
+        
+        setInterval(() => {
+            if (timeLeft <= 0) return;
+            timeLeft--;
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }, 1000);
+    </script>
+</body></html>

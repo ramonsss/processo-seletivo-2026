@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>MemeCard - O Primeiro TCG de Memes Brasileiros</title>
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Montserrat:wght@100..900&display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Tailwind Config -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "background": "#14121f",
+                        "surface-variant": "#363342",
+                        "on-tertiary-container": "#f2dfff",
+                        "primary-fixed-dim": "#d2bbff",
+                        "on-tertiary-fixed": "#2c0051",
+                        "outline-variant": "#4a4455",
+                        "on-surface": "#e5e0f3",
+                        "inverse-surface": "#e5e0f3",
+                        "surface-tint": "#d2bbff",
+                        "on-background": "#e5e0f3",
+                        "secondary-container": "#e3aa00",
+                        "on-secondary": "#402d00",
+                        "surface-dim": "#14121f",
+                        "surface-container-high": "#2b2836",
+                        "inverse-on-surface": "#312f3d",
+                        "on-tertiary-fixed-variant": "#6900b3",
+                        "outline": "#958da1",
+                        "on-primary-fixed-variant": "#5a00c6",
+                        "surface-container-low": "#1c1a27",
+                        "on-error-container": "#ffdad6",
+                        "secondary": "#ffc640",
+                        "surface-container-lowest": "#0e0c19",
+                        "tertiary": "#ddb7ff",
+                        "primary-fixed": "#eaddff",
+                        "tertiary-container": "#8d36db",
+                        "on-primary-container": "#ede0ff",
+                        "on-error": "#690005",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "on-primary": "#3f008e",
+                        "error": "#ffb4ab",
+                        "tertiary-fixed": "#f0dbff",
+                        "on-secondary-container": "#5a4100",
+                        "surface-bright": "#3a3746",
+                        "primary-container": "#7c3aed",
+                        "primary": "#d2bbff",
+                        "on-secondary-fixed": "#261a00",
+                        "on-surface-variant": "#ccc3d8",
+                        "secondary-fixed": "#ffdf9f",
+                        "secondary-fixed-dim": "#f9bd22",
+                        "surface-container-highest": "#363342",
+                        "on-tertiary": "#490080",
+                        "on-primary-fixed": "#25005a",
+                        "surface-container": "#201e2c",
+                        "surface": "#14121f",
+                        "error-container": "#93000a",
+                        "inverse-primary": "#732ee4",
+                        "tertiary-fixed-dim": "#ddb7ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "lg": "2rem",
+                        "margin-desktop": "64px",
+                        "margin-mobile": "16px",
+                        "sm": "1rem",
+                        "xs": "0.5rem",
+                        "gutter": "24px",
+                        "md": "1.5rem",
+                        "xl": "4rem",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Montserrat"],
+                        "stats-number": ["Montserrat"],
+                        "headline-md": ["Montserrat"],
+                        "body-lg": ["Inter"],
+                        "display-lg": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "stats-number": ["20px", { "lineHeight": "24px", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Styles for Glow Effects and Textures */
+        .glow-purple {
+            box-shadow: 0 0 40px rgba(124, 58, 237, 0.2);
+        }
+
+        .glow-gold {
+            box-shadow: 0 0 30px rgba(251, 191, 36, 0.4);
+        }
+
+        .card-bg-gradient {
+            background: linear-gradient(180deg, rgba(20, 18, 31, 0) 0%, rgba(20, 18, 31, 1) 100%);
+        }
+
+        .noise-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: -1;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.05;
+        }
+
+        /* Glassmorphism utilities */
+        .glass {
+            background: rgba(26, 22, 46, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(149, 141, 161, 0.1);
+        }
+
+        /* Floating animation for cards */
+        @keyframes float {
+            0% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-15px) rotate(2deg);
+            }
+
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .animate-float-delayed {
+            animation: float 6s ease-in-out infinite 2s;
+        }
+
+        .animate-float-fast {
+            animation: float 5s ease-in-out infinite 1s;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background text-on-background antialiased min-h-screen relative overflow-x-hidden selection:bg-primary-container selection:text-white">
+    <!-- Noise Texture Overlay -->
+    <div class="noise-bg"></div>
+    <!-- TopNavBar (From JSON) -->
+    <nav
+        class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl border-b border-outline-variant/10 shadow-2xl shadow-primary/5">
+        <div
+            class="flex items-center justify-between px-margin-mobile md:px-margin-desktop h-20 max-w-[1440px] mx-auto">
+            <!-- Brand Logo -->
+            <a class="flex items-center gap-xs hover:opacity-80 transition-all active:scale-95 duration-200" href="#">
+                <img alt="MemeCard Logo" class="h-8 md:h-10 w-auto rounded-DEFAULT"
+                    src="data:image/png;base64,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" />
+                <span
+                    class="hidden md:inline-block font-display-lg text-headline-md font-extrabold text-primary tracking-tighter ml-xs">MemeCard</span>
+            </a>
+            <!-- Desktop Navigation -->
+            <ul class="hidden md:flex items-center gap-lg">
+                <li><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors hover:opacity-80 active:scale-95 duration-200"
+                        href="#">Marketplace</a></li>
+                <li><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors hover:opacity-80 active:scale-95 duration-200"
+                        href="#">Boosters</a></li>
+                <li><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors hover:opacity-80 active:scale-95 duration-200"
+                        href="#">Coleção</a></li>
+            </ul>
+            <!-- Trailing Action -->
+            <div class="flex items-center gap-md">
+                <button
+                    class="font-label-md text-label-md bg-primary-container text-white px-md py-xs rounded-lg hover:opacity-90 transition-all active:scale-95 shadow-[0_0_15px_rgba(124,58,237,0.4)]">Login</button>
+            </div>
+        </div>
+    </nav>
+    <main class="pt-24 pb-xl">
+        <!-- Hero Section -->
+        <section
+            class="relative min-h-[80vh] flex items-center justify-center px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto overflow-hidden">
+            <!-- Background Glows -->
+            <div
+                class="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-primary-container/20 rounded-full blur-[120px] pointer-events-none">
+            </div>
+            <div
+                class="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-tertiary-container/10 rounded-full blur-[150px] pointer-events-none">
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-xl items-center relative z-10 w-full">
+                <!-- Text Content -->
+                <div class="space-y-lg text-center md:text-left">
+                    <h1
+                        class="font-display-lg text-[40px] md:text-display-lg font-extrabold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-on-background to-primary">
+                        Colecione os Memes que Definiram o Brasil
+                    </h1>
+                    <p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mx-auto md:mx-0">
+                        O primeiro TCG de memes brasileiros. Troque, batalhe e colecione lendas da internet em alta
+                        resolução. A raridade define o hype.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-sm justify-center md:justify-start pt-sm">
+                        <button
+                            class="bg-primary-container text-white font-label-md text-label-md px-lg py-sm rounded-lg hover:bg-inverse-primary transition-colors active:scale-95 shadow-[0_0_20px_rgba(124,58,237,0.5)] flex items-center justify-center gap-xs">
+                            <span class="material-symbols-outlined text-[20px]">explore</span>
+                            Ver Cartas
+                        </button>
+                        <button
+                            class="border border-outline-variant text-on-surface font-label-md text-label-md px-lg py-sm rounded-lg hover:bg-surface-variant/50 transition-colors active:scale-95 flex items-center justify-center gap-xs glass">
+                            Saiba Mais
+                        </button>
+                    </div>
+                </div>
+                <!-- Floating Cards -->
+                <div class="relative h-[500px] hidden md:block perspective-[1000px]">
+                    <!-- Card 1 (Back/Left) -->
+                    <div class="absolute top-10 left-0 w-48 h-72 rounded-xl border border-outline-variant/30 overflow-hidden transform -rotate-12 translate-z-[-100px] animate-float-delayed glow-purple bg-surface-container-high"
+                        data-alt="A glowing, digital trading card floating in an isometric perspective. The card features vibrant purple neon borders and a deep black background, showcasing a high-resolution, futuristic meme graphic. Lighting is dramatic, with a 'Neon Noir' aesthetic."
+                        style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDxdpyOAf3wdL8zozhnk8kJw9m_MQxP9KkmPp7vxhfJStx82kaWNDpXbyxvdB8tTkVF0Qakn8SOb9URjdoFWJUmf9YMp5m2NtlT2Tvqit6XcVk6jRgj1stP52eohqLMTCxtMn7fxhjRbOIxSy3HlcsVp2-57jsv8ZY5Ko1JAOXFSHbh6L1oGEyaYBtN_uiPiR4PBLroAEoD7DXK9HARY9Bc-8jkA-tKxjT5Xnu9zvUo89OHrwpXH0pzJZQ4v0Gtfu5H4KahoXJkR0w'); background-size: cover; background-position: center;">
+                        <div class="absolute inset-0 card-bg-gradient opacity-80"></div>
+                        <div class="absolute bottom-0 w-full p-sm">
+                            <div class="flex justify-between items-center text-xs">
+                                <span class="font-label-md text-white">Grávida de Taubaté</span>
+                                <span
+                                    class="bg-surface-variant text-on-surface px-2 py-0.5 rounded-full font-bold">SR</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 2 (Front/Center) -->
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-56 h-[336px] rounded-xl border border-secondary/50 overflow-hidden z-20 animate-float glow-gold bg-surface-container-highest"
+                        data-alt="The focal digital trading card hovering in space. It radiates a luxurious golden outer glow. The card art depicts an iconic Brazilian internet meme rendered in a high-fidelity, polished vector style against a deep dark purple background. The mood is exclusive and premium."
+                        style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCckrL4g4EiZr3PTBB-zdnG0e0FXo_LSYm9wkawRpjIHRszsDPl-e2E3RSo6cLNgOTIJAHZ-CHG7oTuQAVwY_bRTo3MqPtpIWqkgPHkTvhikGsTFbLjhheSJFsZx5pcYU0tHqkgFvVw_j39FLkHER86SQo0mrml5dvxQv2EuZBYNBmgvPqjtLPK2Y6DGQxg2vQvMkU1blhVb1K4ry33p4VOYaAei7y9SlUseKLmFvaOlBF8Sjd6anMEIbFerXAOom_IP1z5alja9OI'); background-size: cover; background-position: center;">
+                        <div
+                            class="absolute top-sm right-sm bg-secondary text-on-secondary font-bold text-[10px] px-2 py-0.5 rounded-full shadow-[0_0_10px_rgba(251,191,36,0.8)] z-10">
+                            SSR</div>
+                        <div class="absolute inset-0 card-bg-gradient opacity-90"></div>
+                        <div class="absolute bottom-0 w-full p-md">
+                            <h3 class="font-headline-md text-[18px] text-white mb-1">Vira-lata Caramelo</h3>
+                            <div class="h-1 w-full bg-surface-variant rounded-full overflow-hidden mt-xs">
+                                <div class="h-full w-3/4 bg-secondary shadow-[0_0_5px_rgba(251,191,36,0.8)]"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 3 (Back/Right) -->
+                    <div class="absolute top-20 right-0 w-48 h-72 rounded-xl border border-outline-variant/30 overflow-hidden transform rotate-12 translate-z-[-50px] animate-float-fast glow-purple bg-surface-container-high"
+                        data-alt="A sleek digital trading card angled to the right, illuminated by electric purple edges. The card design is minimalist and modern, set against a dark glassmorphic background. It represents a rare collector's item in a high-end digital marketplace."
+                        style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuACgdV86MgZWl7vDrygLw0Yvr0tW_2y0KvxOPdwzrkC8RYcDAt7Vr9FrO-ml0B-w3PJlI06qicB4jolIx85Ad0Rg1jJ9aPXRPwa8TgQSCf7xVp77ZVy9SGhEoaXf_J3ZyattyaIPeP-PI4cWGE88_C-eARee6tW2EZrjKubbLRWpw1HmVdMMt9AgiItqm47Y3LY00k85beYo6N7zLlIFPfDIRnA2XzEEgraBH6gN-qSTAdGmClLoppmiT7dyZFMPfcdPxZ82d6XFNE'); background-size: cover; background-position: center;">
+                        <div class="absolute inset-0 card-bg-gradient opacity-80"></div>
+                        <div class="absolute bottom-0 w-full p-sm">
+                            <div class="flex justify-between items-center text-xs">
+                                <span class="font-label-md text-white">Nazaré Confusa</span>
+                                <span
+                                    class="bg-primary-container text-white px-2 py-0.5 rounded-full font-bold shadow-[0_0_8px_rgba(124,58,237,0.6)]">R</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Cartas em Destaque -->
+        <section class="py-xl px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto">
+            <div class="flex justify-between items-end mb-lg">
+                <div>
+                    <h2
+                        class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-xs">
+                        Cartas em Destaque</h2>
+                    <p class="font-body-md text-body-md text-on-surface-variant">As lendas mais negociadas da semana no
+                        marketplace.</p>
+                </div>
+                <button
+                    class="hidden md:flex items-center gap-xs text-primary font-label-md text-label-md hover:text-tertiary transition-colors">
+                    Ver todas <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                </button>
+            </div>
+            <div class="flex overflow-x-auto gap-md pb-md snap-x hide-scrollbar">
+                <!-- Card Item R -->
+                <div class="min-w-[200px] w-[240px] aspect-[2/3] rounded-lg border border-outline-variant/20 bg-surface-container-high relative overflow-hidden group snap-start cursor-pointer hover:border-primary/50 transition-all duration-300 hover:shadow-[0_0_20px_rgba(124,58,237,0.15)] flex-shrink-0"
+                    data-alt="A digital trading card featuring a rare meme. The artwork is framed by a subtle, glowing purple border. The aesthetic is clean, dark, and premium, evoking a sophisticated collector's item within a sleek digital interface."
+                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCZOZ7vQRAJ68MJ86jxeXbzV6XKCglvpbG6cYF1t7N79SbodYqFmCPsAj3IQIpNg6Gpn_OKA66TkHKqm9cjCkLH9KkP4tLdbVUOJgxCDuCz-ax-WL8q556pUMsf-QlSSJRxk6ntLwXgNevqBoZtL0N9-ujuJZl86HaZxRMfKM_U7l88HLZBPSA5kbZzmjO7vQ75-KOM_el0ryN_EfUaG5mAoUyMjhyPOfL1nFxchuQRnMYJuCr9DS6sDfM4agL_v5nH1l-LY3vhlQ8'); background-size: cover; background-position: center;">
+                    <div
+                        class="absolute top-sm right-sm bg-primary-container text-white font-label-md text-[10px] px-2 py-0.5 rounded-full z-10 shadow-[0_0_8px_rgba(124,58,237,0.5)]">
+                        R</div>
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div
+                        class="absolute bottom-0 w-full p-md transform translate-y-2 group-hover:translate-y-0 transition-transform">
+                        <h4 class="font-headline-md text-[16px] text-white mb-1">Bambam Irineu</h4>
+                        <div class="flex justify-between items-center">
+                            <span class="font-label-md text-on-surface-variant text-xs">Última Venda</span>
+                            <span class="font-stats-number text-stats-number text-primary text-[14px]">45 MC</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card Item SR -->
+                <div class="min-w-[200px] w-[240px] aspect-[2/3] rounded-lg border border-primary/30 bg-surface-container-high relative overflow-hidden group snap-start cursor-pointer hover:border-primary transition-all duration-300 hover:shadow-[0_0_25px_rgba(124,58,237,0.3)] flex-shrink-0"
+                    data-alt="A Super Rare digital trading card displaying an intricate meme illustration. It features a prominent electric purple glow and dark tonal layers. The card design is highly structured with a stats bar at the bottom, fitting a modern digital card game."
+                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAAly4Cr9mM61STJoQtn8p37aVDa2_97gnRbkW0gNYEr1mSV9mSPdiwPH9rvh6vzXT4xgMdrGfQWh4SevYxsyYptLqtK0Iw-0QUIuxCgwQv-gj7PRpd0X_5TZodSYGF0MUfMb6WaXbngsbpG9xRorx652fLxtc4lHP7NVV5nzjKNm9pgdFrYqYshVl1F1tvSovQPbfyT6JrxYyMk4EIvv6lF2GXy_Kv955AUQfv-6pR5hnz4UGr0o3WkglhS9A9_Gl6YfZ0vaWeqz0'); background-size: cover; background-position: center;">
+                    <div
+                        class="absolute top-sm right-sm bg-tertiary-container text-white font-label-md text-[10px] px-2 py-0.5 rounded-full z-10 shadow-[0_0_12px_rgba(141,54,219,0.6)]">
+                        SR</div>
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/50 to-transparent opacity-90 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div
+                        class="absolute bottom-0 w-full p-md transform translate-y-2 group-hover:translate-y-0 transition-transform">
+                        <h4 class="font-headline-md text-[16px] text-white mb-1">Luiza no Canadá</h4>
+                        <div class="flex justify-between items-center">
+                            <span class="font-label-md text-on-surface-variant text-xs">Última Venda</span>
+                            <span class="font-stats-number text-stats-number text-primary text-[14px]">120 MC</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card Item SSR -->
+                <div class="min-w-[200px] w-[240px] aspect-[2/3] rounded-lg border border-secondary/40 bg-surface-container-highest relative overflow-hidden group snap-start cursor-pointer hover:border-secondary transition-all duration-300 glow-gold flex-shrink-0"
+                    data-alt="An SSR rarity digital trading card exuding high value. It is enveloped in a shimmering gold aura. The artwork is a masterpiece of vector art representing a legendary Brazilian internet moment. The layout is meticulous, adhering to a minimalist yet energetic Neo-Noir style."
+                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBdXsoiXO_jsfGkzQk2fQiKvkHrH22VWPOf5EMD2OfxiXc5z1ZvQuMOSyowkjT18m_HMtZCVP9dHzojrz1_09BQ__xKkJv-PNky74uwXV76EJw6GC-igxoAq0G-FK5_bMiH26p7AmLcT3WUnlNR78STPTqaUv_cA8S8_AzUrSp7NTZ1Yfum7JuNeF6Kq_9uFqCGdODaJq66MKRdjlDNXehzspUtKnEQDzkvxU2eQqUIClJzj-MZmCafg4O2yYHFd_DApMpqDbTXK9E'); background-size: cover; background-position: center;">
+                    <div
+                        class="absolute top-sm right-sm bg-secondary text-on-secondary font-label-md text-[10px] px-2 py-0.5 rounded-full z-10 shadow-[0_0_15px_rgba(251,191,36,0.8)]">
+                        SSR</div>
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/60 to-transparent opacity-95 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div
+                        class="absolute bottom-0 w-full p-md transform translate-y-2 group-hover:translate-y-0 transition-transform">
+                        <h4 class="font-headline-md text-[16px] text-white mb-1">Choque de Cultura</h4>
+                        <div class="flex justify-between items-center">
+                            <span class="font-label-md text-on-surface-variant text-xs">Última Venda</span>
+                            <span class="font-stats-number text-stats-number text-secondary text-[14px]">850 MC</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card Item C -->
+                <div class="min-w-[200px] w-[240px] aspect-[2/3] rounded-lg border border-outline-variant/10 bg-surface-container-low relative overflow-hidden group snap-start cursor-pointer hover:border-surface-variant transition-all duration-300 flex-shrink-0"
+                    data-alt="A common digital trading card in a sleek app interface. It lacks aggressive glowing effects, favoring a clean, subtle dark aesthetic with a grey tag. The image portrays a classic internet trope in a polished, minimalist gallery style."
+                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD63n3skV9-5dMKaNKHyqEDQL23ixbfPtUN35fQTxRxSjmi8uLDtQozzFfJraYQOfs1J3XnJv-8IDSRf7u_dAHSHxw8StGUdOVmG3R2F7FUFc4RmZ8kge8HX86sYjUsJ7z5eMZH34fMk0byE1EdesDi1UpclJhfA3vUasXMDVy7o_yHS9wkK1-xI0P9Q2r-AvEOXC5-9rYGS6K4SUFjFm6ixNMAHG0R_a56uQqD2buGp76l3G_fQZbymbtBANGjiBzb_vmJdTlk65s'); background-size: cover; background-position: center;">
+                    <div
+                        class="absolute top-sm right-sm bg-surface-variant text-on-surface font-label-md text-[10px] px-2 py-0.5 rounded-full z-10">
+                        C</div>
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/30 to-transparent opacity-80 group-hover:opacity-90 transition-opacity">
+                    </div>
+                    <div
+                        class="absolute bottom-0 w-full p-md transform translate-y-2 group-hover:translate-y-0 transition-transform">
+                        <h4 class="font-headline-md text-[16px] text-white mb-1">E o Bambu?</h4>
+                        <div class="flex justify-between items-center">
+                            <span class="font-label-md text-on-surface-variant text-xs">Última Venda</span>
+                            <span class="font-stats-number text-stats-number text-on-surface text-[14px]">5 MC</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button
+                class="w-full mt-sm md:hidden border border-outline-variant text-on-surface font-label-md text-label-md py-sm rounded-lg flex items-center justify-center gap-xs glass">
+                Ver todas as cartas
+            </button>
+        </section>
+        <!-- Boosters Section -->
+        <section class="py-xl px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto">
+            <div class="glass rounded-xl p-lg md:p-xl border border-primary/20 relative overflow-hidden">
+                <!-- Decorative background elements -->
+                <div class="absolute -right-20 -top-20 w-64 h-64 bg-primary/10 rounded-full blur-[80px]"></div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-lg items-center relative z-10">
+                    <div class="order-2 md:order-1 flex justify-center">
+                        <div class="w-48 h-64 bg-gradient-to-br from-primary-container to-tertiary-container rounded-lg shadow-[0_0_40px_rgba(124,58,237,0.3)] transform -rotate-6 flex items-center justify-center border border-white/20 relative overflow-hidden"
+                            data-alt="A sealed digital booster pack for a trading card game. It features a vibrant, iridescent gradient of electric purple and deep magenta. The packaging design is sleek and metallic, promising high-value contents. The pack is isolated against a dark background.">
+                            <!-- Placeholder for Booster Art -->
+                            <span
+                                class="font-display-lg text-[24px] text-white font-black opacity-50 absolute rotate-[-45deg] scale-150">BOOSTER<br />CLASSIC</span>
+                            <div
+                                class="absolute bottom-sm text-center w-full font-label-md text-white text-xs bg-black/40 py-1 backdrop-blur-sm">
+                                Contém 5 Cartas</div>
+                        </div>
+                    </div>
+                    <div class="order-1 md:order-2 space-y-md text-center md:text-left">
+                        <div
+                            class="inline-block bg-primary-container/20 text-primary border border-primary/30 px-3 py-1 rounded-full font-label-md text-xs mb-xs">
+                            Nova Coleção</div>
+                        <h2
+                            class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">
+                            Booster "Anos 2010"</h2>
+                        <p class="font-body-md text-body-md text-on-surface-variant">
+                            Garanta sua chance de tirar uma SSR Lendária da era de ouro da internet brasileira. Cada
+                            pacote contém 5 cartas aleatórias.
+                        </p>
+                        <div class="flex items-center justify-center md:justify-start gap-md pt-sm">
+                            <span class="font-display-lg text-[32px] text-white font-bold">250 MC</span>
+                            <button
+                                class="bg-primary-container text-white font-label-md text-label-md px-lg py-sm rounded-lg hover:bg-inverse-primary transition-colors active:scale-95 shadow-[0_0_15px_rgba(124,58,237,0.4)] flex items-center gap-xs">
+                                <span class="material-symbols-outlined text-[20px]">shopping_cart</span>
+                                Comprar Booster
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- SSR Lendárias -->
+        <section
+            class="py-xl px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto border-t border-outline-variant/10">
+            <div class="text-center mb-xl">
+                <h2
+                    class="font-display-lg text-[32px] md:text-[40px] text-transparent bg-clip-text bg-gradient-to-r from-secondary to-primary-fixed font-black uppercase tracking-widest mb-xs glow-text">
+                    SSR Lendárias</h2>
+                <p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto">As peças centrais de
+                    qualquer coleção de elite. Disponibilidade extremamente limitada.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-lg max-w-4xl mx-auto">
+                <!-- Highlight Card 1 -->
+                <div
+                    class="flex flex-col sm:flex-row items-center gap-md p-md rounded-xl bg-surface-container border border-outline-variant/20 hover:border-secondary/30 transition-all group">
+                    <div class="w-32 h-48 rounded-md bg-gradient-to-b from-surface-container to-surface-container-highest border border-secondary/50 glow-gold flex-shrink-0 relative overflow-hidden"
+                        data-alt="A highly coveted SSR rarity digital trading card. The artwork depicts a classic viral meme, rendered with premium lighting and subtle grain. A golden aura frames the card, signifying its legendary status in the dark-themed user interface."
+                        style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC1C9qLhbD6_vJ_4arjKT2sQGkjqvPe7Awo4SQcLifDWQWdKygwv2GX1Pw0RkllKNwT66z7igS5ktIZQvllOZnfJBDN3w2sgjaUZLE7fD2gMJv3uz007BCJxb0kRi-4D2TzTuYf66Jb6PAzIdnJVmbYXLnmjFiic-IkKm-S3042mE-T5o-4cGofd0xMh23mHa8W7-5giy-H5ccsuUkxyCkkCdW8qIj4Cz09EMtCm6WZE_iBh5WrOdA0qokCzbY4DwuGGBWfFV-rrHI'); background-size: cover; background-position: center;">
+                        <div class="absolute inset-0 card-bg-gradient opacity-60"></div>
+                    </div>
+                    <div class="space-y-sm text-center sm:text-left w-full">
+                        <div class="flex justify-between items-start w-full">
+                            <h3 class="font-headline-md text-[20px] text-white">Pão de Batata</h3>
+                            <span
+                                class="bg-secondary text-on-secondary font-label-md text-[10px] px-2 py-0.5 rounded-full">SSR</span>
+                        </div>
+                        <p class="font-body-md text-[14px] text-on-surface-variant line-clamp-2">"Um clássico
+                            inesquecível da reportagem policial que virou lenda."</p>
+                        <div class="pt-2">
+                            <div class="flex justify-between font-label-md text-[12px] text-on-surface-variant mb-1">
+                                <span>Estoque Limitado</span>
+                                <span class="text-secondary">3/10 Restantes</span>
+                            </div>
+                            <div class="h-1.5 w-full bg-surface-variant rounded-full overflow-hidden">
+                                <div class="h-full w-[30%] bg-secondary shadow-[0_0_5px_rgba(251,191,36,0.8)]"></div>
+                            </div>
+                        </div>
+                        <button
+                            class="w-full mt-sm bg-gradient-to-r from-[#e3aa00] to-[#f9bd22] text-[#402d00] font-label-md text-label-md py-2 rounded-md font-bold hover:opacity-90 transition-opacity uppercase tracking-wider text-xs">
+                            Mint Card - 5000 MC
+                        </button>
+                    </div>
+                </div>
+                <!-- Highlight Card 2 -->
+                <div
+                    class="flex flex-col sm:flex-row items-center gap-md p-md rounded-xl bg-surface-container border border-outline-variant/20 hover:border-secondary/30 transition-all group">
+                    <div class="w-32 h-48 rounded-md bg-gradient-to-b from-surface-container to-surface-container-highest border border-secondary/50 glow-gold flex-shrink-0 relative overflow-hidden"
+                        data-alt="Another legendary SSR digital card. It is presented horizontally with a shimmering gold edge against a deep purple-black background. The graphic represents a viral music meme, emphasizing high rarity and premium collectability in this modern interface."
+                        style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBS8f_4gh-FfA-P3g1LOn82t3V9eNAfp5dtvMWM70wZ7tfYgMvtH92nmRJJgoitxRst6gtLg5DX152ifEjMt8psrKfyMnfjxBMMbVGZVku3NpZwGb9kcDIFAD0Ur4AuTWSfTCV0dx_vSaB2d7rSjn_ZCpmC_uQYLp_bVy2PVOBKOhTJHUiSWf-9z-mVPI8ggX5qLJrhoIyf3zmojcnUoKypDdZjZY8Nexwyf_ecu--ynRjaeEGjFpby6WiKsmSL0Wc1kiIPamuYJjo'); background-size: cover; background-position: center;">
+                        <div class="absolute inset-0 card-bg-gradient opacity-60"></div>
+                    </div>
+                    <div class="space-y-sm text-center sm:text-left w-full">
+                        <div class="flex justify-between items-start w-full">
+                            <h3 class="font-headline-md text-[20px] text-white">Caneta Azul</h3>
+                            <span
+                                class="bg-secondary text-on-secondary font-label-md text-[10px] px-2 py-0.5 rounded-full">SSR</span>
+                        </div>
+                        <p class="font-body-md text-[14px] text-on-surface-variant line-clamp-2">"A melodia que marcou
+                            uma geração escolar."</p>
+                        <div class="pt-2">
+                            <div class="flex justify-between font-label-md text-[12px] text-on-surface-variant mb-1">
+                                <span>Estoque Limitado</span>
+                                <span class="text-error">1/5 Restantes</span>
+                            </div>
+                            <div class="h-1.5 w-full bg-surface-variant rounded-full overflow-hidden">
+                                <div class="h-full w-[20%] bg-error shadow-[0_0_5px_rgba(255,180,171,0.8)]"></div>
+                            </div>
+                        </div>
+                        <button
+                            class="w-full mt-sm bg-gradient-to-r from-[#e3aa00] to-[#f9bd22] text-[#402d00] font-label-md text-label-md py-2 rounded-md font-bold hover:opacity-90 transition-opacity uppercase tracking-wider text-xs">
+                            Mint Card - 7500 MC
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Footer (From JSON) -->
+    <footer class="bg-surface-container-lowest w-full py-xl border-t border-outline-variant/10">
+        <div
+            class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop gap-md max-w-[1440px] mx-auto">
+            <!-- Brand Logo -->
+            <div class="flex items-center gap-xs font-headline-md text-headline-md text-on-surface">
+                <img alt="MemeCard Logo Footer"
+                    class="h-8 w-auto rounded-DEFAULT grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                    src="data:image/png;base64,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" />
+            </div>
+            <!-- Links -->
+            <ul class="flex flex-wrap justify-center gap-md md:gap-lg">
+                <li><a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors duration-300"
+                        href="#">Termos</a></li>
+                <li><a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors duration-300"
+                        href="#">Privacidade</a></li>
+                <li><a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors duration-300"
+                        href="#">Suporte</a></li>
+                <li><a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors duration-300"
+                        href="#">Discord</a></li>
+            </ul>
+            <!-- Copyright -->
+            <div
+                class="font-body-md text-body-md text-on-surface-variant text-sm mt-md md:mt-0 text-center md:text-left">
+                © 2024 MemeCard TCG. All rights reserved.
+            </div>
+        </div>
+    </footer>
+    <!-- Style specific additions that weren't easily handled by classes alone -->
+    <style>
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</body>
+
+</html>
